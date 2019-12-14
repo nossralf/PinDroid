@@ -30,6 +30,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -52,7 +53,6 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.melnykov.fab.FloatingActionButton;
 import com.pindroid.Constants.BookmarkViewType;
 import com.pindroid.R;
 import com.pindroid.listadapter.BookmarkViewBinder;
@@ -114,8 +114,6 @@ public class BrowseBookmarksFragment extends ListFragment
 		swipeRefreshLayout = (SwipeRefreshLayout) getView().findViewById(R.id.swipe_refresh);
 		swipeRefreshLayout.setOnRefreshListener(this);
 		actionButton = (FloatingActionButton) getView().findViewById(R.id.add_button);
-
-        actionButton.attachToListView(listView);
 		
 	    if (savedInstanceState != null) {
 	        username = savedInstanceState.getString(STATE_USERNAME);
