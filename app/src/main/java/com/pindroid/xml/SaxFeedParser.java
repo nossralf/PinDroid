@@ -21,9 +21,6 @@
 
 package com.pindroid.xml;
 
-import java.io.InputStream;
-import java.text.ParseException;
-
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.sax.Element;
@@ -34,6 +31,9 @@ import android.util.Xml;
 
 import com.pindroid.providers.BookmarkContent.Bookmark;
 import com.pindroid.util.DateParser;
+
+import java.io.InputStream;
+import java.text.ParseException;
 
 public class SaxFeedParser {
 

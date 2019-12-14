@@ -21,13 +21,6 @@
 
 package com.pindroid.syncadapter;
 
-import java.io.IOException;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.auth.AuthenticationException;
-
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.AbstractThreadedSyncAdapter;
@@ -52,6 +45,13 @@ import com.pindroid.platform.TagManager;
 import com.pindroid.providers.BookmarkContent.Bookmark;
 import com.pindroid.providers.NoteContent.Note;
 import com.pindroid.providers.TagContent.Tag;
+
+import org.apache.http.auth.AuthenticationException;
+
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * SyncAdapter implementation for syncing bookmarks.

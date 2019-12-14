@@ -21,14 +21,14 @@
 
 package com.pindroid.service;
 
+import android.app.IntentService;
+import android.content.Intent;
+
 import com.pindroid.Constants;
 import com.pindroid.R;
 import com.pindroid.client.NetworkUtilities;
 import com.pindroid.platform.BookmarkManager;
 import com.pindroid.providers.BookmarkContent.Bookmark;
-
-import android.app.IntentService;
-import android.content.Intent;
 
 public class SaveBookmarkService extends IntentService {
 	

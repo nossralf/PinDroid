@@ -21,12 +21,6 @@
 
 package com.pindroid.providers;
 
-import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
-
 import android.accounts.AccountManager;
 import android.app.SearchManager;
 import android.content.ContentProvider;
@@ -55,6 +49,12 @@ import com.pindroid.providers.BookmarkContent.Bookmark;
 import com.pindroid.providers.NoteContent.Note;
 import com.pindroid.providers.TagContent.Tag;
 import com.pindroid.util.SyncUtils;
+
+import java.util.ArrayList;
+import java.util.Locale;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 public class BookmarkContentProvider extends ContentProvider {
 	

@@ -21,17 +21,16 @@
 
 package com.pindroid.fragment;
 
-import com.pindroid.R;
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.ListFragment;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.support.v4.app.ListFragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+
+import com.pindroid.R;
 
 public class MainSearchResultsFragment extends ListFragment {
 	

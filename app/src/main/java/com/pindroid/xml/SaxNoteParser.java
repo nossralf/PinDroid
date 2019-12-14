@@ -21,17 +21,17 @@
 
 package com.pindroid.xml;
 
-import java.io.InputStream;
-import java.text.ParseException;
-
-import org.xml.sax.Attributes;
-
 import android.sax.EndTextElementListener;
 import android.sax.RootElement;
 import android.sax.StartElementListener;
 import android.util.Xml;
 
 import com.pindroid.providers.NoteContent.Note;
+
+import org.xml.sax.Attributes;
+
+import java.io.InputStream;
+import java.text.ParseException;
 
 public class SaxNoteParser {
 

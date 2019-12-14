@@ -21,11 +21,14 @@
 
 package com.pindroid.activity;
 
-import java.util.Date;
-
 import android.accounts.AccountManager;
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.ShareCompat;
 import android.util.Log;
+import android.widget.Toast;
+
 import com.pindroid.Constants;
 import com.pindroid.R;
 import com.pindroid.application.PindroidApplication;
@@ -35,10 +38,7 @@ import com.pindroid.util.AccountHelper;
 import com.pindroid.util.SettingsHelper;
 import com.pindroid.util.StringUtils;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.ShareCompat;
-import android.widget.Toast;
+import java.util.Date;
 
 public class SaveReadLaterBookmark extends Activity {
 	private static final String TAG = "SaveReadLaterBookmark";

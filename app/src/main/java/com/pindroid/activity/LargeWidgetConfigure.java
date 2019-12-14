@@ -21,10 +21,6 @@
 
 package com.pindroid.activity;
 
-import com.pindroid.Constants;
-import com.pindroid.R;
-import com.pindroid.widget.SearchWidgetProvider;
-
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.annotation.TargetApi;
@@ -35,6 +31,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+
+import com.pindroid.Constants;
+import com.pindroid.R;
+import com.pindroid.widget.SearchWidgetProvider;
 
 public class LargeWidgetConfigure extends ListActivity {
 	

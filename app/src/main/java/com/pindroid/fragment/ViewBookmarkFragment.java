@@ -21,8 +21,6 @@
 
 package com.pindroid.fragment;
 
-import java.util.Date;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.database.ContentObserver;
@@ -61,6 +59,8 @@ import com.pindroid.providers.TagContent.Tag;
 import com.pindroid.ui.AccountSpan;
 import com.pindroid.ui.TagSpan;
 import com.pindroid.util.SettingsHelper;
+
+import java.util.Date;
 
 public class ViewBookmarkFragment extends Fragment implements PindroidFragment {
 	

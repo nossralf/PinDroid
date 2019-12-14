@@ -2,7 +2,6 @@ package com.pindroid.action;
 
 import android.os.AsyncTask;
 
-
 import com.pindroid.client.NetworkUtilities;
 
 public class GetWebpageTitleTask extends AsyncTask<String, Integer, String>{

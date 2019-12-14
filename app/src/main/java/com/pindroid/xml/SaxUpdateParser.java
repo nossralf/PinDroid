@@ -21,17 +21,17 @@
 
 package com.pindroid.xml;
 
-import java.io.InputStream;
-import java.text.ParseException;
-
-import org.xml.sax.Attributes;
-
 import android.sax.RootElement;
 import android.sax.StartElementListener;
 import android.util.Xml;
 
 import com.pindroid.client.Update;
 import com.pindroid.util.DateParser;
+
+import org.xml.sax.Attributes;
+
+import java.io.InputStream;
+import java.text.ParseException;
 
 public class SaxUpdateParser {
 

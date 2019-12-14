@@ -21,17 +21,14 @@
 
 package com.pindroid.fragment;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
-
 import android.preference.PreferenceFragment;
 import android.provider.Settings;
-import android.widget.Toast;
 
 import com.pindroid.Constants;
 import com.pindroid.R;

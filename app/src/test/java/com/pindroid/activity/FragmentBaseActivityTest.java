@@ -5,7 +5,6 @@ import android.accounts.AccountManager;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 
-import com.pindroid.BuildConfig;
 import com.pindroid.Constants;
 import com.pindroid.application.PindroidApplication;
 import com.pindroid.authenticator.AuthenticatorActivity;
@@ -16,8 +15,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowAccountManager;
 import org.robolectric.shadows.ShadowApplication;
 
 import static org.assertj.core.api.Assertions.assertThat;

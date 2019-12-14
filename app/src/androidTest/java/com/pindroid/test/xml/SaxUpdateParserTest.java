@@ -21,15 +21,15 @@
 
 package com.pindroid.test.xml;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.ParseException;
-
 import com.pindroid.client.Update;
 import com.pindroid.xml.SaxUpdateParser;
 
 import org.junit.Test;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.ParseException;
 
 import static org.junit.Assert.assertEquals;
 

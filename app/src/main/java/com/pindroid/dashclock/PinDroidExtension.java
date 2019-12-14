@@ -21,22 +21,18 @@
 
 package com.pindroid.dashclock;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
+import android.database.Cursor;
 
 import com.google.android.apps.dashclock.api.DashClockExtension;
 import com.google.android.apps.dashclock.api.ExtensionData;
-import com.pindroid.Constants;
 import com.pindroid.R;
 import com.pindroid.action.IntentHelper;
-import com.pindroid.activity.Main;
 import com.pindroid.providers.BookmarkContent.Bookmark;
 import com.pindroid.util.AccountHelper;
 
-import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class PinDroidExtension extends DashClockExtension {
 

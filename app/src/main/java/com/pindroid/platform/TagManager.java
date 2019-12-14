@@ -21,15 +21,15 @@
 
 package com.pindroid.platform;
 
-import java.util.ArrayList;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.support.v4.content.CursorLoader;
+import android.text.TextUtils;
 
 import com.pindroid.providers.TagContent.Tag;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.support.v4.content.CursorLoader;
-import android.database.Cursor;
-import android.text.TextUtils;
+import java.util.ArrayList;
 
 public class TagManager {
 	

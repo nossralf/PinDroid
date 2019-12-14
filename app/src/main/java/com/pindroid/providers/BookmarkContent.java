@@ -21,14 +21,14 @@
 
 package com.pindroid.providers;
 
-import java.util.ArrayList;
-
-import com.pindroid.providers.TagContent.Tag;
-
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.BaseColumns;
+
+import com.pindroid.providers.TagContent.Tag;
+
+import java.util.ArrayList;
 
 public class BookmarkContent {
 

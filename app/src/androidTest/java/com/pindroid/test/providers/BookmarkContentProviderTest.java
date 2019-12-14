@@ -21,13 +21,6 @@
 
 package com.pindroid.test.providers;
 
-import java.util.Date;
-
-import com.pindroid.Constants;
-import com.pindroid.providers.BookmarkContent;
-import com.pindroid.providers.BookmarkContentProvider;
-import com.pindroid.providers.BookmarkContent.Bookmark;
-
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -36,6 +29,13 @@ import android.net.Uri;
 import android.test.ProviderTestCase2;
 import android.test.mock.MockContentResolver;
 import android.test.suitebuilder.annotation.Suppress;
+
+import com.pindroid.Constants;
+import com.pindroid.providers.BookmarkContent;
+import com.pindroid.providers.BookmarkContent.Bookmark;
+import com.pindroid.providers.BookmarkContentProvider;
+
+import java.util.Date;
 
 @Suppress // broken right now due to java.lang.ClassCastException: android.test.IsolatedContext cannot be cast to com.pindroid.application.PindroidApplication
 public class BookmarkContentProviderTest extends ProviderTestCase2<BookmarkContentProvider> {

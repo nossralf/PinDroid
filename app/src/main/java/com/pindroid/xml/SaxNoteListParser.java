@@ -21,12 +21,6 @@
 
 package com.pindroid.xml;
 
-import java.io.InputStream;
-import java.text.ParseException;
-import java.util.ArrayList;
-
-import org.xml.sax.Attributes;
-
 import android.sax.EndElementListener;
 import android.sax.EndTextElementListener;
 import android.sax.RootElement;
@@ -35,6 +29,12 @@ import android.util.Xml;
 
 import com.pindroid.providers.NoteContent.Note;
 import com.pindroid.util.DateParser;
+
+import org.xml.sax.Attributes;
+
+import java.io.InputStream;
+import java.text.ParseException;
+import java.util.ArrayList;
 
 public class SaxNoteListParser {
 

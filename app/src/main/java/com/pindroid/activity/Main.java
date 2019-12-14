@@ -21,33 +21,26 @@
 
 package com.pindroid.activity;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
-
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.graphics.drawable.VectorDrawableCompat;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.LoaderManager;
 import android.support.v4.app.ShareCompat;
+import android.support.v4.content.Loader;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -92,6 +85,11 @@ import com.pindroid.ui.ResizeAnimation;
 import com.pindroid.util.AccountHelper;
 import com.pindroid.util.SettingsHelper;
 import com.pindroid.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
 
 public class Main extends FragmentBaseActivity implements OnBookmarkSelectedListener, 
 		OnTagSelectedListener, OnNoteSelectedListener, OnBookmarkActionListener, OnSearchActionListener, LoaderManager.LoaderCallbacks<Cursor> {

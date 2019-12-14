@@ -21,10 +21,10 @@
 
 package com.pindroid.providers;
 
-import org.json.JSONObject;
-
 import android.text.Spanned;
 import android.util.Log;
+
+import org.json.JSONObject;
 
 public class ArticleContent {
 

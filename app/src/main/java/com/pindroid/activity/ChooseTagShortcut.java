@@ -21,21 +21,17 @@
 
 package com.pindroid.activity;
 
+import android.accounts.AccountManager;
+import android.content.Intent;
+import android.content.Intent.ShortcutIconResource;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+
 import com.pindroid.Constants;
 import com.pindroid.R;
 import com.pindroid.action.IntentHelper;
 import com.pindroid.fragment.BrowseTagsFragment;
-
-import android.accounts.Account;
-import android.accounts.AccountManager;
-import android.annotation.TargetApi;
-import android.content.Intent;
-import android.content.Intent.ShortcutIconResource;
-import android.os.Build;
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
 
 public class ChooseTagShortcut extends AppCompatActivity implements BrowseTagsFragment.OnTagSelectedListener {
 

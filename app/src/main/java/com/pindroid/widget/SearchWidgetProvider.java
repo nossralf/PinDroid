@@ -21,19 +21,17 @@
 
 package com.pindroid.widget;
 
-import com.pindroid.R;
-import com.pindroid.action.IntentHelper;
-import com.pindroid.activity.LargeWidgetConfigure;
-
-import com.pindroid.platform.BookmarkManager;
-
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
-
 import android.content.Context;
 import android.view.View;
 import android.widget.RemoteViews;
+
+import com.pindroid.R;
+import com.pindroid.action.IntentHelper;
+import com.pindroid.activity.LargeWidgetConfigure;
+import com.pindroid.platform.BookmarkManager;
 
 public class SearchWidgetProvider extends AppWidgetProvider {
 	

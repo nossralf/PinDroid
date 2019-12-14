@@ -21,9 +21,31 @@
 
 package com.pindroid.fragment;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
+import android.accounts.Account;
+import android.app.Activity;
+import android.database.Cursor;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.CursorAdapter;
+import android.text.Html;
+import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnFocusChangeListener;
+import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.FilterQueryProvider;
+import android.widget.MultiAutoCompleteTextView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.iangclifton.android.floatlabel.FloatLabel;
 import com.pindroid.R;
@@ -39,32 +61,9 @@ import com.pindroid.util.AccountHelper;
 import com.pindroid.util.SettingsHelper;
 import com.pindroid.util.SpaceTokenizer;
 
-import android.accounts.Account;
-import android.app.Activity;
-import android.database.Cursor;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.CursorAdapter;
-import android.text.Html;
-import android.text.SpannableStringBuilder;
-import android.text.TextUtils;
-import android.text.method.LinkMovementMethod;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.View.OnFocusChangeListener;
-import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.FilterQueryProvider;
-import android.widget.MultiAutoCompleteTextView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 
 public class AddBookmarkFragment extends Fragment implements PindroidFragment {
 	

@@ -21,20 +21,6 @@
 
 package com.pindroid.fragment;
 
-import java.io.IOException;
-import java.text.ParseException;
-
-import com.pindroid.Constants;
-import com.pindroid.R;
-import com.pindroid.Constants.BookmarkViewType;
-import com.pindroid.client.PinboardFeed;
-import com.pindroid.fragment.BrowseBookmarksFragment.OnBookmarkSelectedListener;
-import com.pindroid.listadapter.BookmarkViewBinder;
-import com.pindroid.platform.BookmarkManager;
-import com.pindroid.providers.BookmarkContent.Bookmark;
-import com.pindroid.util.AccountHelper;
-import com.pindroid.util.SettingsHelper;
-
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
@@ -47,6 +33,7 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuInflater;
@@ -55,9 +42,22 @@ import android.view.View;
 import android.view.View.OnCreateContextMenuListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.support.v4.widget.SimpleCursorAdapter;
+import android.widget.ListView;
+
+import com.pindroid.Constants;
+import com.pindroid.Constants.BookmarkViewType;
+import com.pindroid.R;
+import com.pindroid.client.PinboardFeed;
+import com.pindroid.fragment.BrowseBookmarksFragment.OnBookmarkSelectedListener;
+import com.pindroid.listadapter.BookmarkViewBinder;
+import com.pindroid.platform.BookmarkManager;
+import com.pindroid.providers.BookmarkContent.Bookmark;
+import com.pindroid.util.AccountHelper;
+import com.pindroid.util.SettingsHelper;
+
+import java.io.IOException;
+import java.text.ParseException;
 
 public class BrowseBookmarkFeedFragment extends ListFragment 
 	implements LoaderManager.LoaderCallbacks<Cursor>, BookmarkBrowser, PindroidFragment  {

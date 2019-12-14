@@ -21,13 +21,13 @@
 
 package com.pindroid.listadapter;
 
-import com.pindroid.R;
-
 import android.database.Cursor;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
 import android.widget.ImageView;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+
+import com.pindroid.R;
 
 public class BookmarkViewBinder implements SimpleCursorAdapter.ViewBinder {
 

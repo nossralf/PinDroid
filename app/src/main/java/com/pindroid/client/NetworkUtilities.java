@@ -21,8 +21,11 @@
 
 package com.pindroid.client;
 
-import java.io.IOException;
-import java.net.URLEncoder;
+import android.net.Uri;
+import android.util.Log;
+
+import com.pindroid.Constants;
+import com.pindroid.providers.ArticleContent.Article;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -36,11 +39,8 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
-import com.pindroid.Constants;
-import com.pindroid.providers.ArticleContent.Article;
-
-import android.net.Uri;
-import android.util.Log;
+import java.io.IOException;
+import java.net.URLEncoder;
 
 /**
  * Provides utility methods for communicating with the server.

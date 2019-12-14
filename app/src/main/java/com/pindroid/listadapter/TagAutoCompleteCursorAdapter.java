@@ -21,11 +21,11 @@
 
 package com.pindroid.listadapter;
 
-import com.pindroid.providers.TagContent.Tag;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.SimpleCursorAdapter;
+
+import com.pindroid.providers.TagContent.Tag;
 
 public class TagAutoCompleteCursorAdapter extends SimpleCursorAdapter {
 

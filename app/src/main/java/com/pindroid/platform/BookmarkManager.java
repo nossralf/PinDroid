@@ -21,12 +21,6 @@
 
 package com.pindroid.platform;
 
-import java.util.ArrayList;
-
-import com.pindroid.providers.ContentNotFoundException;
-import com.pindroid.providers.BookmarkContent.Bookmark;
-import com.pindroid.util.Md5Hash;
-
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -35,6 +29,12 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 import android.support.v4.content.CursorLoader;
 import android.text.TextUtils;
+
+import com.pindroid.providers.BookmarkContent.Bookmark;
+import com.pindroid.providers.ContentNotFoundException;
+import com.pindroid.util.Md5Hash;
+
+import java.util.ArrayList;
 
 public class BookmarkManager {
 	

@@ -21,19 +21,19 @@
 
 package com.pindroid.client;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.ParseException;
+import android.database.Cursor;
+import android.util.Log;
+
+import com.pindroid.xml.SaxFeedParser;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.auth.AuthenticationException;
 import org.apache.http.client.methods.HttpGet;
 
-import com.pindroid.xml.SaxFeedParser;
-
-import android.database.Cursor;
-import android.util.Log;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.ParseException;
 
 public class PinboardFeed {
     private static final String TAG = "PinboardFeed";
