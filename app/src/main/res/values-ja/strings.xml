@@ -3,7 +3,6 @@
 <resources>
   <string name="label">Pinboard</string>
   <string name="pindroid">PinDroid</string>
-  <string name="pinboard_lower">pinboard</string>
   <string name="ui_activity_title">ログインする</string>
   <string name="ui_activity_authenticating">ログインしています...</string>
   <string name="login_activity_username_label">ユーザー名</string>
@@ -13,7 +12,6 @@
   <string name="login_activity_loginfail_text_pwonly">You entered the wrong password or your account has changed.
         Please re-enter your password.</string>
   <string name="login_activity_loginfail_text_pwmissing">Pinboard アカウントのパスワードを入力してください</string>
-  <string name="login_activity_newaccount_text">Pinboard アカウントにログインします。\n\nPinboard アカウントをお持ちでない場合、サインアップは以下の URL から可能です\nhttp://pinboard.in/signup</string>
   <string name="titleMain">Pinboard</string>
   <string name="share_menu_add_bookmark">Pinoboard に追加</string>
   <string name="share_menu_read_later">Pinboard あとで読む</string>
@@ -174,9 +172,6 @@
   <string name="pref_reading_fontsize_title">Font Size</string>
   <string name="pref_reading_fontsize_key">pref_reading_fontsize</string>
   <string name="pref_reading_fontsize_summary">Font size for read view</string>
-  <string name="pref_reading_linespace_title">Line Spacing</string>
-  <string name="pref_reading_linespace_key">pref_reading_linespace</string>
-  <string name="pref_reading_linespace_summary">Space between lines in read view</string>
   <string name="pref_license_title">License</string>
   <string name="pref_license_key">pref_license</string>
   <string name="pref_license_summary">Licensed under the GPL v3</string>
@@ -203,21 +198,4 @@
   <string name="alt_widget_my_tags">My Tags</string>
   <string name="alt_widget_add_bookmark">Add Bookmark</string>
   <string name="alt_widget_search">Search</string>
-  <string name="about_activity_title">About PinDroid</string>
-  <string name="about_text">
-    &lt;html&gt; 
-    &lt;body style="background-color:#000000;color:#BEBEBE"&gt;
-    	PinDroid is a port of DeliciousDroid for the Pinboard bookmarking system.&lt;br/&gt;&lt;br/&gt;
-    	Developed, maintained, and supported by Matt Schmidt&lt;br/&gt;&lt;br/&gt;
-    	Find a bug or have a suggestion for a new feature?  Open an issue at &lt;a href=\'http://code.google.com/p/pindroid/issues\'&gt;http://code.google.com/p/pindroid/issues&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;
-    	Or, drop me a line on Twitter @PinDroid&lt;br/&gt;&lt;br/&gt;
-    	&lt;b&gt;Known Issues:&lt;/b&gt;
-    	&lt;ul&gt;
-     		&lt;li&gt;Only a single Pinboard account is currently supported. &lt;/li&gt;
-     		&lt;li&gt;Certain features from DeliciousDroid have not been ported yet due to limitations in Pinboards API, including contact syncing and viewing network bookmark lists. &lt;/li&gt;
-    	&lt;/ul&gt;&lt;br/&gt;
-    	Read view powered by viewtext.org
-    &lt;/body&gt;
-    &lt;/html&gt;
-    </string>
 </resources>
