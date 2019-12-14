@@ -33,8 +33,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -48,6 +46,9 @@ import com.pindroid.R;
 import com.pindroid.client.PinboardApi;
 import com.pindroid.providers.BookmarkContentProvider;
 import com.pindroid.util.SyncUtils;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 /**
  * Activity which displays login screen to the user.

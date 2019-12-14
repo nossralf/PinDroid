@@ -29,11 +29,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.AsyncTaskLoader;
-import android.support.v4.content.Loader;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuInflater;
@@ -58,6 +53,12 @@ import com.pindroid.util.SettingsHelper;
 
 import java.io.IOException;
 import java.text.ParseException;
+
+import androidx.cursoradapter.widget.SimpleCursorAdapter;
+import androidx.fragment.app.ListFragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.AsyncTaskLoader;
+import androidx.loader.content.Loader;
 
 public class BrowseBookmarkFeedFragment extends ListFragment 
 	implements LoaderManager.LoaderCallbacks<Cursor>, BookmarkBrowser, PindroidFragment  {

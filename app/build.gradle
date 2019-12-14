@@ -12,7 +12,7 @@ android {
         versionName "3.3.2"
         vectorDrawables.useSupportLibrary = true
         testApplicationId "com.pindroid.test"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -44,21 +44,20 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support:design:28.0.0'
-    implementation 'com.android.support:support-v4:28.0.0'
-    implementation 'com.android.support:support-v13:28.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.legacy:legacy-support-v13:1.0.0'
     implementation 'com.google.android.apps.dashclock:dashclock-api:2.0.0'
     implementation 'com.iangclifton.android:floatlabel:1.0.4'
 
-    androidTestImplementation 'com.android.support.test:rules:1.0.2'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
 
+    testImplementation 'androidx.test:core:1.2.0'
     testImplementation 'com.artemzin.assert-parcelable:assert-parcelable:1.0.1'
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.assertj:assertj-core:3.14.0'
     testImplementation 'org.khronos:opengl-api:gl1.1-android-2.1_r1'
     testImplementation 'org.robolectric:robolectric:4.3.1'
-    testImplementation 'org.robolectric:shadows-httpclient:4.3.1'
-    testImplementation 'org.robolectric:shadows-support-v4:3.3.2'
 }

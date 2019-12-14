@@ -6,7 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
+
+import androidx.test.core.app.ApplicationProvider;
 
 @RunWith(RobolectricTestRunner.class)
 public class DatabaseHelperTest {
@@ -15,7 +16,7 @@ public class DatabaseHelperTest {
 
     @Before
     public void beforeEachTest() {
-        helper = new DatabaseHelper(RuntimeEnvironment.application);
+        helper = new DatabaseHelper(ApplicationProvider.getApplicationContext());
     }
 
     @Test

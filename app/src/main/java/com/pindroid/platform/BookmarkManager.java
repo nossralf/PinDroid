@@ -27,7 +27,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
-import android.support.v4.content.CursorLoader;
 import android.text.TextUtils;
 
 import com.pindroid.providers.BookmarkContent.Bookmark;
@@ -35,6 +34,8 @@ import com.pindroid.providers.ContentNotFoundException;
 import com.pindroid.util.Md5Hash;
 
 import java.util.ArrayList;
+
+import androidx.loader.content.CursorLoader;
 
 public class BookmarkManager {
 	

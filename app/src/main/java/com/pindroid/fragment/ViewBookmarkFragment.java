@@ -27,9 +27,6 @@ import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.ShareActionProvider;
 import android.text.SpannableStringBuilder;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
@@ -61,6 +58,10 @@ import com.pindroid.ui.TagSpan;
 import com.pindroid.util.SettingsHelper;
 
 import java.util.Date;
+
+import androidx.appcompat.widget.ShareActionProvider;
+import androidx.core.view.MenuItemCompat;
+import androidx.fragment.app.Fragment;
 
 public class ViewBookmarkFragment extends Fragment implements PindroidFragment {
 	

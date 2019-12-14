@@ -24,7 +24,6 @@ package com.pindroid.activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 
 import com.pindroid.R;
@@ -32,6 +31,8 @@ import com.pindroid.application.PindroidApplication;
 import com.pindroid.fragment.SelectTagsFragment;
 
 import java.util.Set;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SelectTags extends AppCompatActivity implements SelectTagsFragment.OnTagsSelectedListener {
 

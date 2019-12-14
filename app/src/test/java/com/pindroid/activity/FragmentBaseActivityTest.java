@@ -2,8 +2,8 @@ package com.pindroid.activity;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.app.Application;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 
 import com.pindroid.Constants;
 import com.pindroid.application.PindroidApplication;
@@ -13,12 +13,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
-import org.robolectric.shadows.ShadowApplication;
+
+import androidx.annotation.NonNull;
+import androidx.test.core.app.ApplicationProvider;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.robolectric.Robolectric.buildActivity;
+import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 public class FragmentBaseActivityTest {
@@ -34,7 +36,7 @@ public class FragmentBaseActivityTest {
     public void activity_startsAuthenticationOnNoAccount() {
         controller.create().start().resume();
 
-        final Intent intent = ShadowApplication.getInstance().getNextStartedActivity();
+        final Intent intent = shadowOf((Application) ApplicationProvider.getApplicationContext()).getNextStartedActivity();
         assertThat(intent.getComponent().getClassName()).isEqualTo(AuthenticatorActivity.class.getName());
     }
 
@@ -51,10 +53,10 @@ public class FragmentBaseActivityTest {
     }
 
     private void addPinboardAccount(@NonNull String name) {
-        final AccountManager am = AccountManager.get(RuntimeEnvironment.application);
+        final AccountManager am = AccountManager.get(ApplicationProvider.getApplicationContext());
         final Account account = new Account(name, Constants.ACCOUNT_TYPE);
         am.addAccountExplicitly(account, "password", null);
-        ((PindroidApplication) RuntimeEnvironment.application).setUsername(name);
+        ((PindroidApplication) ApplicationProvider.getApplicationContext()).setUsername(name);
     }
 
     public static class TestActivity extends FragmentBaseActivity {

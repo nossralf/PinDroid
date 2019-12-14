@@ -28,9 +28,6 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,6 +37,10 @@ import com.pindroid.R;
 import com.pindroid.application.PindroidApplication;
 import com.pindroid.authenticator.AuthenticatorActivity;
 import com.pindroid.util.AccountHelper;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.view.MenuItemCompat;
 
 public abstract class FragmentBaseActivity extends AppCompatActivity {
 	

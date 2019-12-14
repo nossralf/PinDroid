@@ -1,11 +1,12 @@
 package com.pindroid.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.pindroid.R;
 import com.pindroid.fragment.AddBookmarkFragment;
 import com.pindroid.providers.BookmarkContent;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class AddBookmark extends AppCompatActivity implements AddBookmarkFragment.OnBookmarkSaveListener {
 

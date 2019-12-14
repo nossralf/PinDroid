@@ -22,7 +22,6 @@
 package com.pindroid.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +31,8 @@ import com.pindroid.R;
 import com.pindroid.platform.NoteManager;
 import com.pindroid.providers.ContentNotFoundException;
 import com.pindroid.providers.NoteContent.Note;
+
+import androidx.fragment.app.Fragment;
 
 public class ViewNoteFragment extends Fragment {
 	

@@ -23,10 +23,6 @@ package com.pindroid.fragment;
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -36,6 +32,11 @@ import android.widget.TextView;
 import com.pindroid.R;
 import com.pindroid.platform.TagManager;
 import com.pindroid.providers.TagContent.Tag;
+
+import androidx.cursoradapter.widget.SimpleCursorAdapter;
+import androidx.fragment.app.ListFragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 
 public class BrowseTagsFragment extends ListFragment
 	implements LoaderManager.LoaderCallbacks<Cursor>, PindroidFragment  {

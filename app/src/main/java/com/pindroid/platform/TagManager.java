@@ -24,12 +24,13 @@ package com.pindroid.platform;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.support.v4.content.CursorLoader;
 import android.text.TextUtils;
 
 import com.pindroid.providers.TagContent.Tag;
 
 import java.util.ArrayList;
+
+import androidx.loader.content.CursorLoader;
 
 public class TagManager {
 	
