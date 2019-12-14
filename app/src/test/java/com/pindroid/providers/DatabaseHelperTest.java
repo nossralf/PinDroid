@@ -11,7 +11,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants=BuildConfig.class, sdk=23)
 public class DatabaseHelperTest {
 
     private DatabaseHelper helper;

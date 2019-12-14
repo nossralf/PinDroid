@@ -13,7 +13,6 @@ import java.util.Date;
 import static com.artemzin.assert_parcelable.AssertParcelable.assertThatObjectParcelable;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants=BuildConfig.class, sdk=23)
 public class BookmarkTest {
     @Test
     public void bookmark_isParcelable() {
