@@ -79,7 +79,8 @@ public class BookmarkContentProvider extends ContentProvider {
 	private static final int UnreadCount = 9;
 	private static final int NoteId = 10;
 	private static final int BookmarkId = 11;
-	
+
+	private static final String TAG = "BookmarkContentProvider";
 	
 	private static final String SuggestionLimit = "10";
 	
@@ -268,7 +269,7 @@ public class BookmarkContentProvider extends ContentProvider {
 
 	@Override
 	public Cursor query(Uri uri, String[] projection, String selection,	String[] selectionArgs, String sortOrder) {
-		Log.d("BookmarkContentProvider Query", uri.toString());
+		Log.d(TAG, "query uri=" + uri.toString());
 		
 		switch(sURIMatcher.match(uri)) {
 			case Bookmarks:
@@ -368,7 +369,7 @@ public class BookmarkContentProvider extends ContentProvider {
 	}
 	
 	private Cursor getSearchSuggestions(String query, boolean accountSpecific) {
-		Log.d("getSearchSuggestions", query);
+		Log.d(TAG, "getSearchSuggestions query=" + query);
 		
 		Map<String, SearchSuggestionContent> tagSuggestions = new TreeMap<String, SearchSuggestionContent>();
 		Map<String, SearchSuggestionContent> bookmarkSuggestions = new TreeMap<String, SearchSuggestionContent>();
@@ -387,7 +388,7 @@ public class BookmarkContentProvider extends ContentProvider {
 	}
 	
 	private Map<String, SearchSuggestionContent> getBookmarkSearchSuggestions(String query, boolean accountSpecific) {
-		Log.d("getBookmarkSearchSuggestions", query);
+		Log.d(TAG, "getBookmarkSearchSuggestions query=" + query);
 		
 		String[] bookmarks = query.split(" ");
 		
@@ -527,7 +528,7 @@ public class BookmarkContentProvider extends ContentProvider {
 	}
 	
 	private Map<String, SearchSuggestionContent> getNoteSearchSuggestions(String query, boolean accountSpecific) {
-		Log.d("getNoteSearchSuggestions", query);
+		Log.d(TAG,"getNoteSearchSuggestions query=" + query);
 		
 		String[] notes = query.split(" ");
 		

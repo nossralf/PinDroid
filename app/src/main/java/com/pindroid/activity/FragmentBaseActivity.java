@@ -165,7 +165,8 @@ public abstract class FragmentBaseActivity extends AppCompatActivity {
 	}
 	
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data){	
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
 		if(resultCode == Activity.RESULT_CANCELED && requestCode != Constants.REQUEST_CODE_ACCOUNT_CHANGE){
 			finish();
 		} else if(resultCode == Activity.RESULT_OK && requestCode == Constants.REQUEST_CODE_ACCOUNT_CHANGE){
