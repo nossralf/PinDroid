@@ -28,112 +28,116 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import com.pindroid.R;
-import com.pindroid.platform.TagManager;
-import com.pindroid.providers.TagContent.Tag;
-
 import androidx.cursoradapter.widget.SimpleCursorAdapter;
 import androidx.fragment.app.ListFragment;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
+import com.pindroid.R;
+import com.pindroid.platform.TagManager;
+import com.pindroid.providers.TagContent.Tag;
 
 public class BrowseTagsFragment extends ListFragment
-	implements LoaderManager.LoaderCallbacks<Cursor>, PindroidFragment  {
+    implements LoaderManager.LoaderCallbacks<Cursor>, PindroidFragment {
 
-	private String sortfield = Tag.Name + " ASC";
-	private SimpleCursorAdapter mAdapter;
-	
-	private String username = null;
-	private String query = null;
-	
-	private OnTagSelectedListener tagSelectedListener;
-	private OnItemClickListener clickListener;
-	
-	public interface OnTagSelectedListener {
-		public void onTagSelected(String tag);
-	}
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState){
-		super.onCreate(savedInstanceState);
-		clickListener = viewListener;
-		setRetainInstance(true);
-	}
-	
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState){
-		super.onActivityCreated(savedInstanceState);
+  private String sortfield = Tag.Name + " ASC";
+  private SimpleCursorAdapter mAdapter;
 
-		mAdapter = new SimpleCursorAdapter(this.getActivity(), 
-				R.layout.tag_view, null, 
-				new String[] {Tag.Name, Tag.Count}, new int[] {R.id.tag_name, R.id.tag_count}, 0);
-		
-		setListAdapter(mAdapter);	
-		
-		getLoaderManager().initLoader(0, null, this);
-		
-		ListView lv = getListView();
-		lv.setTextFilterEnabled(true);
-		lv.setFastScrollEnabled(true);
-		lv.setOnItemClickListener(clickListener);
+  private String username = null;
+  private String query = null;
 
-		lv.setItemsCanFocus(false);
-		lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-	}
-	
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	
-	public String getAccount(){
-		return username;
-	}
-	
-	public void setQuery(String query) {
-		this.query = query;
-	}
-	
-	public void refresh(){
-		try{
-			getLoaderManager().restartLoader(0, null, this);
-		} catch(Exception e){}
-	}
-	
-	private OnItemClickListener viewListener = new OnItemClickListener() {
-	    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-	    	String tagName = ((TextView)view.findViewById(R.id.tag_name)).getText().toString();
-	    	
-	    	tagSelectedListener.onTagSelected(tagName);
-	    }
-	};
-	
-	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-		if(username != null) {
-			if(query != null) {
-				return TagManager.SearchTags(query, username, this.getActivity());
-			} else {
-				return TagManager.GetTags(username, sortfield, this.getActivity());
-			}
-		}
-		else return null;
-	}
-	
-	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-	    mAdapter.swapCursor(data);
-	}
-	
-	public void onLoaderReset(Loader<Cursor> loader) {
-	    mAdapter.swapCursor(null);
-	}
-	
-	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		try {
-			tagSelectedListener = (OnTagSelectedListener) activity;
-		} catch (ClassCastException e) {
-			throw new ClassCastException(activity.toString() + " must implement OnTagSelectedListener");
-		}
-	}
+  private OnTagSelectedListener tagSelectedListener;
+  private OnItemClickListener clickListener;
+
+  public interface OnTagSelectedListener {
+    public void onTagSelected(String tag);
+  }
+
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    clickListener = viewListener;
+    setRetainInstance(true);
+  }
+
+  @Override
+  public void onActivityCreated(Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
+
+    mAdapter =
+        new SimpleCursorAdapter(
+            this.getActivity(),
+            R.layout.tag_view,
+            null,
+            new String[] {Tag.Name, Tag.Count},
+            new int[] {R.id.tag_name, R.id.tag_count},
+            0);
+
+    setListAdapter(mAdapter);
+
+    getLoaderManager().initLoader(0, null, this);
+
+    ListView lv = getListView();
+    lv.setTextFilterEnabled(true);
+    lv.setFastScrollEnabled(true);
+    lv.setOnItemClickListener(clickListener);
+
+    lv.setItemsCanFocus(false);
+    lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  public String getAccount() {
+    return username;
+  }
+
+  public void setQuery(String query) {
+    this.query = query;
+  }
+
+  public void refresh() {
+    try {
+      getLoaderManager().restartLoader(0, null, this);
+    } catch (Exception e) {
+    }
+  }
+
+  private OnItemClickListener viewListener =
+      new OnItemClickListener() {
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+          String tagName = ((TextView) view.findViewById(R.id.tag_name)).getText().toString();
+
+          tagSelectedListener.onTagSelected(tagName);
+        }
+      };
+
+  public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+    if (username != null) {
+      if (query != null) {
+        return TagManager.SearchTags(query, username, this.getActivity());
+      } else {
+        return TagManager.GetTags(username, sortfield, this.getActivity());
+      }
+    } else return null;
+  }
+
+  public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    mAdapter.swapCursor(data);
+  }
+
+  public void onLoaderReset(Loader<Cursor> loader) {
+    mAdapter.swapCursor(null);
+  }
+
+  @Override
+  public void onAttach(Activity activity) {
+    super.onAttach(activity);
+    try {
+      tagSelectedListener = (OnTagSelectedListener) activity;
+    } catch (ClassCastException e) {
+      throw new ClassCastException(activity.toString() + " must implement OnTagSelectedListener");
+    }
+  }
 }

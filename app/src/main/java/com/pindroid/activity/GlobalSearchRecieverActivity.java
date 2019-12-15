@@ -27,19 +27,19 @@ import android.content.Intent;
 import android.os.Bundle;
 
 public class GlobalSearchRecieverActivity extends Activity {
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
 
-        getIntent().setComponent(new ComponentName(this, Main.class));
-        
-        Intent intent = new Intent(this, Main.class);
-        intent.setAction(getIntent().getAction());
-        intent.putExtras(getIntent());
-        intent.setData(getIntent().getData());
-        
-        startActivityIfNeeded(intent, 0);
-        finish();
-	}
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+
+    getIntent().setComponent(new ComponentName(this, Main.class));
+
+    Intent intent = new Intent(this, Main.class);
+    intent.setAction(getIntent().getAction());
+    intent.putExtras(getIntent());
+    intent.setData(getIntent().getData());
+
+    startActivityIfNeeded(intent, 0);
+    finish();
+  }
 }

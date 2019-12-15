@@ -21,37 +21,36 @@
 
 package com.pindroid.test.xml;
 
+import static org.junit.Assert.assertEquals;
+
 import com.pindroid.client.Update;
 import com.pindroid.xml.SaxUpdateParser;
-
-import org.junit.Test;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 public class SaxUpdateParserTest {
-	
-	private String updateTest = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><update time=\"2011-03-24T19:02:07Z\" />";
 
-	@Test
-	public void testUpdateParsing() throws ParseException{
+  private String updateTest =
+      "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><update time=\"2011-03-24T19:02:07Z\" />";
 
-		InputStream is = new ByteArrayInputStream(updateTest.getBytes());
-		
-		SaxUpdateParser parser = new SaxUpdateParser(is);
-		
-		Update r = parser.parse();
-			
-		assertEquals(1300993327000l, r.getLastUpdate());
-		
-		try {
-			is.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+  @Test
+  public void testUpdateParsing() throws ParseException {
+
+    InputStream is = new ByteArrayInputStream(updateTest.getBytes());
+
+    SaxUpdateParser parser = new SaxUpdateParser(is);
+
+    Update r = parser.parse();
+
+    assertEquals(1300993327000l, r.getLastUpdate());
+
+    try {
+      is.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 }

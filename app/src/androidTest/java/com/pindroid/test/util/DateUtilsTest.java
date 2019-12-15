@@ -21,57 +21,55 @@
 
 package com.pindroid.test.util;
 
-import com.pindroid.util.DateParser;
-
-import org.junit.Test;
-
-import java.util.Date;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import com.pindroid.util.DateParser;
+import java.util.Date;
+import org.junit.Test;
+
 public class DateUtilsTest {
 
-	@Test
-	public void testDateParsing(){
+  @Test
+  public void testDateParsing() {
 
-		try {
-			Date d = DateParser.parse("2005-11-28T05:26:09Z");
-			
-			assertEquals(2005, d.getYear() + 1900);
-			assertEquals(11, d.getMonth() + 1);
-			assertEquals(28, d.getDate());
-			assertEquals(5, d.getHours() + (d.getTimezoneOffset() / 60));
-			assertEquals(26, d.getMinutes());
-			assertEquals(9, d.getSeconds());
+    try {
+      Date d = DateParser.parse("2005-11-28T05:26:09Z");
 
-		} catch (Exception e) {
-		}
-		
-		try {
-			Date d = DateParser.parse("2005-11-28T05:26:09");	
-			fail("Expected date parser to fail on invalid format.");
+      assertEquals(2005, d.getYear() + 1900);
+      assertEquals(11, d.getMonth() + 1);
+      assertEquals(28, d.getDate());
+      assertEquals(5, d.getHours() + (d.getTimezoneOffset() / 60));
+      assertEquals(26, d.getMinutes());
+      assertEquals(9, d.getSeconds());
 
-		} catch (Exception e) {
-		}
-	}
+    } catch (Exception e) {
+    }
 
-	@Test
-	public void testDateTimeParsing(){
+    try {
+      Date d = DateParser.parse("2005-11-28T05:26:09");
+      fail("Expected date parser to fail on invalid format.");
 
-		try {
-			long time = DateParser.parseTime("2005-11-28T05:26:09Z");
-			
-			assertEquals(1133155569000l, time);
+    } catch (Exception e) {
+    }
+  }
 
-		} catch (Exception e) {
-		}
-		
-		try {
-			Date d = DateParser.parse("2005-11-28T05:26:09");	
-			fail("Expected date time parser to fail on invalid format.");
+  @Test
+  public void testDateTimeParsing() {
 
-		} catch (Exception e) {
-		}
-	}
+    try {
+      long time = DateParser.parseTime("2005-11-28T05:26:09Z");
+
+      assertEquals(1133155569000l, time);
+
+    } catch (Exception e) {
+    }
+
+    try {
+      Date d = DateParser.parse("2005-11-28T05:26:09");
+      fail("Expected date time parser to fail on invalid format.");
+
+    } catch (Exception e) {
+    }
+  }
 }

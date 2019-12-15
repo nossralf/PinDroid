@@ -23,86 +23,79 @@ package com.pindroid.providers;
 
 import android.text.Spanned;
 import android.util.Log;
-
 import org.json.JSONObject;
 
 public class ArticleContent {
 
-	public static class Article {
+  public static class Article {
 
-		
-        private String url;
-        private String responseUrl;
-        private String content;
-        private String title;
-        private Spanned span;
+    private String url;
+    private String responseUrl;
+    private String content;
+    private String title;
+    private Spanned span;
 
+    public String getUrl() {
+      return url;
+    }
 
-        public String getUrl() {
-            return url;
-        }
+    public void setUrl(String url) {
+      this.url = url;
+    }
 
-        public void setUrl(String url) {
-        	this.url = url;
-        }
-        
-        public Spanned getSpan() {
-            return span;
-        }
+    public Spanned getSpan() {
+      return span;
+    }
 
-        public void setSpan(Spanned span) {
-        	this.span = span;
-        }
-        
-        public String getResponseUrl() {
-            return responseUrl;
-        }
+    public void setSpan(Spanned span) {
+      this.span = span;
+    }
 
-        public void setResponseUrl(String responseUrl) {
-        	this.responseUrl = responseUrl;
-        }
-        
-        public String getContent() {
-            return content;
-        }
+    public String getResponseUrl() {
+      return responseUrl;
+    }
 
-        public void setContent(String content) {
-        	this.content = content;
-        }
-        
-        public String getTitle() {
-            return title;
-        }
+    public void setResponseUrl(String responseUrl) {
+      this.responseUrl = responseUrl;
+    }
 
-        public void setTitle(String title) {
-        	this.title = title;
-        }
-        
+    public String getContent() {
+      return content;
+    }
 
-        
-        public Article() {
-        }
-        
-        public Article(String content, String title, String url, String responseUrl) {
-        	this.content = content;
-        	this.title = title;
-        	this.url = url;
-        	this.responseUrl = responseUrl;
-        }
-        
-        
-        public static Article valueOf(JSONObject userBookmark) {
-            try {
-                final String content = userBookmark.getString("content");
-                final String title = userBookmark.getString("title");
-                final String url = userBookmark.getString("url");
-                final String responseUrl = userBookmark.getString("responseUrl");
+    public void setContent(String content) {
+      this.content = content;
+    }
 
-                return new Article(content, title, url, responseUrl);
-            } catch (final Exception ex) {
-            	Log.i("User.Bookmark", "Error parsing JSON user object");
-            }
-            return null;
-        }
-	}
+    public String getTitle() {
+      return title;
+    }
+
+    public void setTitle(String title) {
+      this.title = title;
+    }
+
+    public Article() {}
+
+    public Article(String content, String title, String url, String responseUrl) {
+      this.content = content;
+      this.title = title;
+      this.url = url;
+      this.responseUrl = responseUrl;
+    }
+
+    public static Article valueOf(JSONObject userBookmark) {
+      try {
+        final String content = userBookmark.getString("content");
+        final String title = userBookmark.getString("title");
+        final String url = userBookmark.getString("url");
+        final String responseUrl = userBookmark.getString("responseUrl");
+
+        return new Article(content, title, url, responseUrl);
+      } catch (final Exception ex) {
+        Log.i("User.Bookmark", "Error parsing JSON user object");
+      }
+      return null;
+    }
+  }
 }

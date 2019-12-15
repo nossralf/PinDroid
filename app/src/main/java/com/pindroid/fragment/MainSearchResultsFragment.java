@@ -28,64 +28,70 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
+import androidx.fragment.app.ListFragment;
 import com.pindroid.R;
 
-import androidx.fragment.app.ListFragment;
-
 public class MainSearchResultsFragment extends ListFragment {
-	
-	private OnSearchActionListener searchActionListener;
-	private String query;
-	
-	public interface OnSearchActionListener {
-		public void onBookmarkSearch(String query);
-		public void onTagSearch(String query);
-		public void onNoteSearch(String query);
-		public void onGlobalTagSearch(String query);
-	}
-	
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState){
-		super.onActivityCreated(savedInstanceState);
-		
-		getActivity().setTitle(R.string.main_search_results_title);
-		
-		String[] MENU_ITEMS = new String[] {getString(R.string.search_results_bookmark),
-				getString(R.string.search_results_tag), getString(R.string.search_results_note),
-				getString(R.string.search_results_global_tag)};
-		
-		setListAdapter(new ArrayAdapter<String>(getActivity(), R.layout.result_view, MENU_ITEMS));
-		
-		ListView lv = getListView();
-		lv.setTextFilterEnabled(true);
 
-		lv.setOnItemClickListener(new OnItemClickListener() {
-		    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		    	if(position == 0){
-		    		searchActionListener.onBookmarkSearch(query);
-		    	} else if(position == 1){
-		    		searchActionListener.onTagSearch(query);
-		    	} else if(position == 2){
-		    		searchActionListener.onNoteSearch(query);
-		    	} else if(position == 3){
-		    		searchActionListener.onGlobalTagSearch(query);
-		    	}
-		    }
-		});
-	}
-	
-	public void setQuery(String query){
-		this.query = query;
-	}
+  private OnSearchActionListener searchActionListener;
+  private String query;
 
-	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		try {
-			searchActionListener = (OnSearchActionListener) activity;
-		} catch (ClassCastException e) {
-			throw new ClassCastException(activity.toString() + " must implement OnSearchActionListener");
-		}
-	}
+  public interface OnSearchActionListener {
+    public void onBookmarkSearch(String query);
+
+    public void onTagSearch(String query);
+
+    public void onNoteSearch(String query);
+
+    public void onGlobalTagSearch(String query);
+  }
+
+  @Override
+  public void onActivityCreated(Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
+
+    getActivity().setTitle(R.string.main_search_results_title);
+
+    String[] MENU_ITEMS =
+        new String[] {
+          getString(R.string.search_results_bookmark),
+          getString(R.string.search_results_tag),
+          getString(R.string.search_results_note),
+          getString(R.string.search_results_global_tag)
+        };
+
+    setListAdapter(new ArrayAdapter<String>(getActivity(), R.layout.result_view, MENU_ITEMS));
+
+    ListView lv = getListView();
+    lv.setTextFilterEnabled(true);
+
+    lv.setOnItemClickListener(
+        new OnItemClickListener() {
+          public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            if (position == 0) {
+              searchActionListener.onBookmarkSearch(query);
+            } else if (position == 1) {
+              searchActionListener.onTagSearch(query);
+            } else if (position == 2) {
+              searchActionListener.onNoteSearch(query);
+            } else if (position == 3) {
+              searchActionListener.onGlobalTagSearch(query);
+            }
+          }
+        });
+  }
+
+  public void setQuery(String query) {
+    this.query = query;
+  }
+
+  @Override
+  public void onAttach(Activity activity) {
+    super.onAttach(activity);
+    try {
+      searchActionListener = (OnSearchActionListener) activity;
+    } catch (ClassCastException e) {
+      throw new ClassCastException(activity.toString() + " must implement OnSearchActionListener");
+    }
+  }
 }

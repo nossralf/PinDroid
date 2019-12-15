@@ -25,51 +25,52 @@ import android.sax.EndTextElementListener;
 import android.sax.RootElement;
 import android.sax.StartElementListener;
 import android.util.Xml;
-
 import com.pindroid.providers.NoteContent.Note;
-
-import org.xml.sax.Attributes;
-
 import java.io.InputStream;
 import java.text.ParseException;
+import org.xml.sax.Attributes;
 
 public class SaxNoteParser {
 
-	private InputStream is;
-	
-    public SaxNoteParser(InputStream stream) {
-    	is = stream;
+  private InputStream is;
+
+  public SaxNoteParser(InputStream stream) {
+    is = stream;
+  }
+
+  public Note parse() throws ParseException {
+    final Note note = new Note();
+    final RootElement root = new RootElement("note");
+
+    root.setStartElementListener(
+        new StartElementListener() {
+          public void start(Attributes attributes) {
+            final String id = attributes.getValue("id");
+
+            note.setPid(id);
+          }
+        });
+
+    root.getChild("hash")
+        .setEndTextElementListener(
+            new EndTextElementListener() {
+              public void end(String body) {
+                note.setHash(body);
+              }
+            });
+    root.getChild("text")
+        .setEndTextElementListener(
+            new EndTextElementListener() {
+              public void end(String body) {
+                note.setText(body);
+              }
+            });
+
+    try {
+      Xml.parse(is, Xml.Encoding.UTF_8, root.getContentHandler());
+    } catch (Exception e) {
+      throw new ParseException(e.getMessage(), 0);
     }
-
-    public Note parse() throws ParseException {
-        final Note note = new Note();
-        final RootElement root = new RootElement("note");
-        
-        root.setStartElementListener(new StartElementListener(){
-            public void start(Attributes attributes) {
-            	final String id = attributes.getValue("id");
-            	
-            	note.setPid(id);
-            }
-        });
-        
-        root.getChild("hash").setEndTextElementListener(new EndTextElementListener(){
-            public void end(String body) {
-            	note.setHash(body);
-            }
-        });
-        root.getChild("text").setEndTextElementListener(new EndTextElementListener(){
-            public void end(String body) {
-            	note.setText(body);
-            }
-        });
-
-
-        try {
-            Xml.parse(is, Xml.Encoding.UTF_8, root.getContentHandler());
-        } catch (Exception e) {
-            throw new ParseException(e.getMessage(), 0);
-        }
-        return note;
-    }
+    return note;
+  }
 }

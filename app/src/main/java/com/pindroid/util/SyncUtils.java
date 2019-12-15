@@ -27,47 +27,46 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
 import android.widget.Toast;
-
+import androidx.annotation.NonNull;
 import com.pindroid.Constants;
 import com.pindroid.R;
 import com.pindroid.providers.BookmarkContentProvider;
 
-import androidx.annotation.NonNull;
-
 public class SyncUtils {
 
-	public static void addPeriodicSync(String authority, Bundle extras, long frequency, Context context) {
-		AccountManager am = AccountManager.get(context);
-		Account[] accounts = am.getAccountsByType(Constants.ACCOUNT_TYPE);
-		
-		for(Account a : accounts) {
-			
-			ContentResolver.addPeriodicSync(a, authority, extras, frequency * 60);
-		}
-	}
-	
-    public static void removePeriodicSync(String authority, Bundle extras, Context context) {	
-		AccountManager am = AccountManager.get(context);
-		Account[] accounts = am.getAccountsByType(Constants.ACCOUNT_TYPE);
-		
-		for(Account a : accounts) {
-			ContentResolver.removePeriodicSync(a, authority, extras);
-		}
-    }
-    
-    public static void clearSyncMarkers(Context context) {
-		Account[] accounts = AccountManager.get(context).getAccountsByType(Constants.ACCOUNT_TYPE);
-		for(Account a : accounts){
-			AccountManager.get(context).setUserData(a, Constants.SYNC_MARKER_KEY, "0");
-		}
-    }
+  public static void addPeriodicSync(
+      String authority, Bundle extras, long frequency, Context context) {
+    AccountManager am = AccountManager.get(context);
+    Account[] accounts = am.getAccountsByType(Constants.ACCOUNT_TYPE);
 
-	public static void requestSync(@NonNull Context context) {
-		Toast.makeText(context, context.getString(R.string.syncing_toast), Toast.LENGTH_LONG).show();
-		clearSyncMarkers(context);
+    for (Account a : accounts) {
 
-		Bundle extras = new Bundle();
-		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
-		ContentResolver.requestSync(null, BookmarkContentProvider.AUTHORITY, extras);
-	}
+      ContentResolver.addPeriodicSync(a, authority, extras, frequency * 60);
+    }
+  }
+
+  public static void removePeriodicSync(String authority, Bundle extras, Context context) {
+    AccountManager am = AccountManager.get(context);
+    Account[] accounts = am.getAccountsByType(Constants.ACCOUNT_TYPE);
+
+    for (Account a : accounts) {
+      ContentResolver.removePeriodicSync(a, authority, extras);
+    }
+  }
+
+  public static void clearSyncMarkers(Context context) {
+    Account[] accounts = AccountManager.get(context).getAccountsByType(Constants.ACCOUNT_TYPE);
+    for (Account a : accounts) {
+      AccountManager.get(context).setUserData(a, Constants.SYNC_MARKER_KEY, "0");
+    }
+  }
+
+  public static void requestSync(@NonNull Context context) {
+    Toast.makeText(context, context.getString(R.string.syncing_toast), Toast.LENGTH_LONG).show();
+    clearSyncMarkers(context);
+
+    Bundle extras = new Bundle();
+    extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+    ContentResolver.requestSync(null, BookmarkContentProvider.AUTHORITY, extras);
+  }
 }

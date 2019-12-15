@@ -21,18 +21,17 @@
 
 package com.pindroid.test.util;
 
-import com.pindroid.util.IntUtils;
-
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
+
+import com.pindroid.util.IntUtils;
+import org.junit.Test;
 
 public class IntUtilsTest {
 
-	@Test
-	public void testIntParsing(){
-		assertEquals(1, IntUtils.parseUInt("1"));
-		assertEquals(1, IntUtils.parseUInt("01"));
-		assertEquals(2165, IntUtils.parseUInt("2165"));
-	}
+  @Test
+  public void testIntParsing() {
+    assertEquals(1, IntUtils.parseUInt("1"));
+    assertEquals(1, IntUtils.parseUInt("01"));
+    assertEquals(2165, IntUtils.parseUInt("2165"));
+  }
 }

@@ -31,93 +31,96 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
+import androidx.appcompat.app.AppCompatActivity;
 import com.pindroid.Constants;
 import com.pindroid.R;
 import com.pindroid.action.IntentHelper;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 public class ScreenShortcut extends AppCompatActivity {
 
-	private String username = "";
-    private ListView listView;
+  private String username = "";
+  private ListView listView;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.small_widget_configure_activity);
-        getSupportActionBar().setTitle(R.string.small_widget_configuration_description);
+    setContentView(R.layout.small_widget_configure_activity);
+    getSupportActionBar().setTitle(R.string.small_widget_configuration_description);
 
-        listView = (ListView) findViewById(R.id.shortcut_list);
+    listView = (ListView) findViewById(R.id.shortcut_list);
 
-		Intent i = AccountManager.newChooseAccountIntent(null, null, new String[]{Constants.ACCOUNT_TYPE}, false, null, null, null, null);
-		startActivityForResult(i, Constants.REQUEST_CODE_ACCOUNT_CHANGE);
+    Intent i =
+        AccountManager.newChooseAccountIntent(
+            null, null, new String[] {Constants.ACCOUNT_TYPE}, false, null, null, null, null);
+    startActivityForResult(i, Constants.REQUEST_CODE_ACCOUNT_CHANGE);
 
-        String[] MENU_ITEMS = new String[] {getString(R.string.small_widget_my_bookmarks),
-                getString(R.string.small_widget_my_unread),
-                getString(R.string.small_widget_my_notes),
-                getString(R.string.small_widget_add_bookmark),
-                getString(R.string.small_widget_search_bookmarks)};
+    String[] MENU_ITEMS =
+        new String[] {
+          getString(R.string.small_widget_my_bookmarks),
+          getString(R.string.small_widget_my_unread),
+          getString(R.string.small_widget_my_notes),
+          getString(R.string.small_widget_add_bookmark),
+          getString(R.string.small_widget_search_bookmarks)
+        };
 
+    listView.setAdapter(new ArrayAdapter<String>(this, R.layout.widget_configure_view, MENU_ITEMS));
 
-        listView.setAdapter(new ArrayAdapter<String>(this, R.layout.widget_configure_view, MENU_ITEMS));
+    listView.setOnItemClickListener(
+        new AdapterView.OnItemClickListener() {
+          public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            final Context context = ScreenShortcut.this;
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final Context context = ScreenShortcut.this;
+            Intent shortcutIntent;
+            String shortcutName;
 
-                Intent shortcutIntent;
-                String shortcutName;
-
-                switch (position){
-                    default:
-                    case 0:
-                        shortcutIntent = IntentHelper.ViewBookmarks(null, username, null, context);
-                        shortcutName = getString(R.string.small_widget_my_bookmarks);
-                        break;
-                    case 1:
-                        shortcutIntent = IntentHelper.ViewUnread(username, context);
-                        shortcutName = getString(R.string.small_widget_my_unread);
-                        break;
-                    case 2:
-                        shortcutIntent = IntentHelper.ViewNotes(username, context);
-                        shortcutName = getString(R.string.small_widget_my_notes);
-                        break;
-                    case 3:
-                        shortcutIntent = IntentHelper.AddBookmark(null, username, context);
-                        shortcutName = getString(R.string.small_widget_add_bookmark);
-                        break;
-                    case 4:
-                        shortcutIntent = IntentHelper.WidgetSearch(username, context);
-                        shortcutName = getString(R.string.small_widget_search_bookmarks);
-                        break;
-                }
-
-
-                final ShortcutIconResource iconResource = ShortcutIconResource.fromContext(context, R.drawable.ic_main);
-                final Intent intent = new Intent();
-                intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
-                intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, shortcutName);
-                intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, iconResource);
-                setResult(RESULT_OK, intent);
-                finish();
+            switch (position) {
+              default:
+              case 0:
+                shortcutIntent = IntentHelper.ViewBookmarks(null, username, null, context);
+                shortcutName = getString(R.string.small_widget_my_bookmarks);
+                break;
+              case 1:
+                shortcutIntent = IntentHelper.ViewUnread(username, context);
+                shortcutName = getString(R.string.small_widget_my_unread);
+                break;
+              case 2:
+                shortcutIntent = IntentHelper.ViewNotes(username, context);
+                shortcutName = getString(R.string.small_widget_my_notes);
+                break;
+              case 3:
+                shortcutIntent = IntentHelper.AddBookmark(null, username, context);
+                shortcutName = getString(R.string.small_widget_add_bookmark);
+                break;
+              case 4:
+                shortcutIntent = IntentHelper.WidgetSearch(username, context);
+                shortcutName = getString(R.string.small_widget_search_bookmarks);
+                break;
             }
-        });
-    }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		return false;
-	}
-	
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data){	
-		super.onActivityResult(requestCode, resultCode, data);
-		
-		if(requestCode == Constants.REQUEST_CODE_ACCOUNT_CHANGE){
-			username = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
-		}
-	}
+            final ShortcutIconResource iconResource =
+                ShortcutIconResource.fromContext(context, R.drawable.ic_main);
+            final Intent intent = new Intent();
+            intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
+            intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, shortcutName);
+            intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, iconResource);
+            setResult(RESULT_OK, intent);
+            finish();
+          }
+        });
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    return false;
+  }
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+
+    if (requestCode == Constants.REQUEST_CODE_ACCOUNT_CHANGE) {
+      username = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
+    }
+  }
 }

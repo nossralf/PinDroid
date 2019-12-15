@@ -25,44 +25,39 @@ import android.database.Cursor;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.pindroid.R;
-
 import androidx.cursoradapter.widget.SimpleCursorAdapter;
+import com.pindroid.R;
 
 public class BookmarkViewBinder implements SimpleCursorAdapter.ViewBinder {
 
-	public boolean setViewValue(View v, Cursor c, int columnIndex) {
-        switch(v.getId()) {
-            case R.id.bookmark_description:
-            case R.id.bookmark_feed_description:
-            	((TextView)v).setText(c.getString(columnIndex));
-            	break;
-            case R.id.bookmark_tags:
-            case R.id.bookmark_feed_tags:
-            	((TextView)v).setText(c.getString(columnIndex));
-            	break;
-            case R.id.bookmark_unread:
-            	if(c.getInt(columnIndex) == 1)
-            		v.setVisibility(View.VISIBLE);
-            	else v.setVisibility(View.INVISIBLE);
-            	break;
-            case R.id.bookmark_synced:
-            	if(c.getInt(columnIndex) == 0)
-            		v.setVisibility(View.INVISIBLE);
-            	else v.setVisibility(View.VISIBLE);
-            	
-            	if(c.getInt(columnIndex) == -1)
-            		((ImageView)v).setImageResource(R.drawable.ic_sync_problem_red_24dp);
-            	else ((ImageView)v).setImageResource(R.drawable.ic_sync_green_24dp);
-            	break;
-            case R.id.bookmark_private:
-                if(c.getInt(columnIndex) == 0)
-                	v.setVisibility(View.VISIBLE);
-                	else v.setVisibility(View.INVISIBLE);
-            	break;
-        }
+  public boolean setViewValue(View v, Cursor c, int columnIndex) {
+    switch (v.getId()) {
+      case R.id.bookmark_description:
+      case R.id.bookmark_feed_description:
+        ((TextView) v).setText(c.getString(columnIndex));
+        break;
+      case R.id.bookmark_tags:
+      case R.id.bookmark_feed_tags:
+        ((TextView) v).setText(c.getString(columnIndex));
+        break;
+      case R.id.bookmark_unread:
+        if (c.getInt(columnIndex) == 1) v.setVisibility(View.VISIBLE);
+        else v.setVisibility(View.INVISIBLE);
+        break;
+      case R.id.bookmark_synced:
+        if (c.getInt(columnIndex) == 0) v.setVisibility(View.INVISIBLE);
+        else v.setVisibility(View.VISIBLE);
 
-		return true;
-	}
+        if (c.getInt(columnIndex) == -1)
+          ((ImageView) v).setImageResource(R.drawable.ic_sync_problem_red_24dp);
+        else ((ImageView) v).setImageResource(R.drawable.ic_sync_green_24dp);
+        break;
+      case R.id.bookmark_private:
+        if (c.getInt(columnIndex) == 0) v.setVisibility(View.VISIBLE);
+        else v.setVisibility(View.INVISIBLE);
+        break;
+    }
+
+    return true;
+  }
 }

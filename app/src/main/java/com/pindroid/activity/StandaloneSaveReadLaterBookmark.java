@@ -21,7 +21,4 @@
 
 package com.pindroid.activity;
 
-
-public class StandaloneSaveReadLaterBookmark extends SaveReadLaterBookmark {
-
-}
+public class StandaloneSaveReadLaterBookmark extends SaveReadLaterBookmark {}

@@ -37,26 +37,26 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 
 public class HttpClientFactory {
-	
-	public static final int REGISTRATION_TIMEOUT = 30 * 1000; // ms
-	
-	public static HttpClient getThreadSafeClient() {
-	    
-	    HttpParams params = new BasicHttpParams();
-	    ConnManagerParams.setMaxTotalConnections(params, 100);
-	    HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
-	    
-        HttpConnectionParams.setConnectionTimeout(params, REGISTRATION_TIMEOUT);
-        HttpConnectionParams.setSoTimeout(params, REGISTRATION_TIMEOUT);
-        ConnManagerParams.setTimeout(params, REGISTRATION_TIMEOUT);
-        
-        SchemeRegistry schemeRegistry = new SchemeRegistry();
-        schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
-        schemeRegistry.register(new Scheme("https", SSLSocketFactory.getSocketFactory(), 443));
-        
-        ClientConnectionManager mgr = new ThreadSafeClientConnManager(params, schemeRegistry);
-        HttpClient client = new DefaultHttpClient(mgr, params);
 
-	    return client;
-	} 
+  public static final int REGISTRATION_TIMEOUT = 30 * 1000; // ms
+
+  public static HttpClient getThreadSafeClient() {
+
+    HttpParams params = new BasicHttpParams();
+    ConnManagerParams.setMaxTotalConnections(params, 100);
+    HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
+
+    HttpConnectionParams.setConnectionTimeout(params, REGISTRATION_TIMEOUT);
+    HttpConnectionParams.setSoTimeout(params, REGISTRATION_TIMEOUT);
+    ConnManagerParams.setTimeout(params, REGISTRATION_TIMEOUT);
+
+    SchemeRegistry schemeRegistry = new SchemeRegistry();
+    schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+    schemeRegistry.register(new Scheme("https", SSLSocketFactory.getSocketFactory(), 443));
+
+    ClientConnectionManager mgr = new ThreadSafeClientConnManager(params, schemeRegistry);
+    HttpClient client = new DefaultHttpClient(mgr, params);
+
+    return client;
+  }
 }

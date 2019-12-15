@@ -31,148 +31,147 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.view.MenuItemCompat;
 import com.pindroid.Constants;
 import com.pindroid.R;
 import com.pindroid.application.PindroidApplication;
 import com.pindroid.authenticator.AuthenticatorActivity;
 import com.pindroid.util.AccountHelper;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.core.view.MenuItemCompat;
-
 public abstract class FragmentBaseActivity extends AppCompatActivity {
-	
-	protected AccountManager mAccountManager;
-	
-	public PindroidApplication app;
-	
-	static final String STATE_USERNAME = "username";
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState){
-		super.onCreate(savedInstanceState);
-		
-		app = (PindroidApplication)getApplicationContext();
-		
-		mAccountManager = AccountManager.get(this);
-		
-		if(getSupportActionBar() != null) {
-			getSupportActionBar().setHomeButtonEnabled(true);
-		}
-		
-		Intent intent = getIntent();
-		
-		if(Intent.ACTION_SEARCH.equals(intent.getAction()) && !intent.hasExtra("MainSearchResults")){
-			if(intent.hasExtra("username"))
-				app.setUsername(intent.getStringExtra("username"));
-			
-			if(intent.hasExtra(SearchManager.QUERY)){
-				//Intent i = new Intent(this, MainSearchResults.class);
-				//i.putExtras(intent.getExtras());
-				//startActivity(i);
-				//finish();
-			} else {
-				onSearchRequested();
-			}
-		}
-		
-		//init();
-	}
-	
-	private void init(){
-		if(AccountHelper.getAccountCount(this) < 1) {		
-			Intent i = new Intent(this, AuthenticatorActivity.class);
-			startActivityForResult(i, Constants.REQUEST_CODE_ACCOUNT_INIT);
-		}
-	}
-	
-	@Override
-	public void onResume() {
-		super.onResume();
-		
-		init();
-		
-		if(app.getUsername() != null && AccountHelper.getAccountCount(this) > 1){
-			setSubtitle(app.getUsername());
-		}
-	}
-	
-	public void searchHandler(View v) {
-		onSearchRequested();
-	}
-	
-	public void setupSearch(Menu menu){
-    	SearchManager searchManager = (SearchManager)getSystemService(Context.SEARCH_SERVICE);
-    	MenuItem searchItem = menu.findItem(R.id.menu_search);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-    	searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-    	searchView.setSubmitButtonEnabled(false);
-    	
-    	searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
-    	    public boolean onQueryTextSubmit(String query) {
-    	    	startSearch(query);
-    	    	return true;
-    	    }
+  protected AccountManager mAccountManager;
 
-    	    public boolean onQueryTextChange(final String s) {
-    	    	return false;
-    	    }
-    	});
-	}
+  public PindroidApplication app;
 
-	protected abstract void startSearch(final String query);
-	
-	@Override
-	public void onSaveInstanceState(Bundle savedInstanceState) {	
-		savedInstanceState.putString(STATE_USERNAME, app.getUsername());
+  static final String STATE_USERNAME = "username";
 
-	    super.onSaveInstanceState(savedInstanceState);
-	}
-	
-	@Override
-	public void onRestoreInstanceState(Bundle savedInstanceState) {
-	    super.onRestoreInstanceState(savedInstanceState);
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
 
-	    app.setUsername(savedInstanceState.getString(STATE_USERNAME));
-	}
-	
-	public boolean isMyself() {
-		for(Account account : mAccountManager.getAccountsByType(Constants.ACCOUNT_TYPE)){
-			if(app.getUsername().equals(account.name))
-				return true;
-		}
-		
-		return false;
-	}
-	
-	private void setSubtitle(String subtitle){
-		getSupportActionBar().setSubtitle(subtitle);
-	}
-	
-	// signal to derived activity that the account may have changed
-	protected abstract void changeAccount();
-	
-	protected void setAccount(String username){
-		app.setUsername(username);
-		
-		if(AccountHelper.getAccountCount(this) > 1)
-			setSubtitle(app.getUsername());
-		
-		changeAccount();
-	}
-	
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		if(resultCode == Activity.RESULT_CANCELED && requestCode != Constants.REQUEST_CODE_ACCOUNT_CHANGE){
-			finish();
-		} else if(resultCode == Activity.RESULT_OK && requestCode == Constants.REQUEST_CODE_ACCOUNT_CHANGE){
-			setAccount(data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME));	
-		} else if(resultCode == Activity.RESULT_OK && requestCode == Constants.REQUEST_CODE_ACCOUNT_INIT){
-			setAccount(AccountHelper.getFirstAccount(this).name);
-		}
-	}
+    app = (PindroidApplication) getApplicationContext();
+
+    mAccountManager = AccountManager.get(this);
+
+    if (getSupportActionBar() != null) {
+      getSupportActionBar().setHomeButtonEnabled(true);
+    }
+
+    Intent intent = getIntent();
+
+    if (Intent.ACTION_SEARCH.equals(intent.getAction()) && !intent.hasExtra("MainSearchResults")) {
+      if (intent.hasExtra("username")) app.setUsername(intent.getStringExtra("username"));
+
+      if (intent.hasExtra(SearchManager.QUERY)) {
+        // Intent i = new Intent(this, MainSearchResults.class);
+        // i.putExtras(intent.getExtras());
+        // startActivity(i);
+        // finish();
+      } else {
+        onSearchRequested();
+      }
+    }
+
+    // init();
+  }
+
+  private void init() {
+    if (AccountHelper.getAccountCount(this) < 1) {
+      Intent i = new Intent(this, AuthenticatorActivity.class);
+      startActivityForResult(i, Constants.REQUEST_CODE_ACCOUNT_INIT);
+    }
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+
+    init();
+
+    if (app.getUsername() != null && AccountHelper.getAccountCount(this) > 1) {
+      setSubtitle(app.getUsername());
+    }
+  }
+
+  public void searchHandler(View v) {
+    onSearchRequested();
+  }
+
+  public void setupSearch(Menu menu) {
+    SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+    MenuItem searchItem = menu.findItem(R.id.menu_search);
+    SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+    searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+    searchView.setSubmitButtonEnabled(false);
+
+    searchView.setOnQueryTextListener(
+        new SearchView.OnQueryTextListener() {
+
+          public boolean onQueryTextSubmit(String query) {
+            startSearch(query);
+            return true;
+          }
+
+          public boolean onQueryTextChange(final String s) {
+            return false;
+          }
+        });
+  }
+
+  protected abstract void startSearch(final String query);
+
+  @Override
+  public void onSaveInstanceState(Bundle savedInstanceState) {
+    savedInstanceState.putString(STATE_USERNAME, app.getUsername());
+
+    super.onSaveInstanceState(savedInstanceState);
+  }
+
+  @Override
+  public void onRestoreInstanceState(Bundle savedInstanceState) {
+    super.onRestoreInstanceState(savedInstanceState);
+
+    app.setUsername(savedInstanceState.getString(STATE_USERNAME));
+  }
+
+  public boolean isMyself() {
+    for (Account account : mAccountManager.getAccountsByType(Constants.ACCOUNT_TYPE)) {
+      if (app.getUsername().equals(account.name)) return true;
+    }
+
+    return false;
+  }
+
+  private void setSubtitle(String subtitle) {
+    getSupportActionBar().setSubtitle(subtitle);
+  }
+
+  // signal to derived activity that the account may have changed
+  protected abstract void changeAccount();
+
+  protected void setAccount(String username) {
+    app.setUsername(username);
+
+    if (AccountHelper.getAccountCount(this) > 1) setSubtitle(app.getUsername());
+
+    changeAccount();
+  }
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if (resultCode == Activity.RESULT_CANCELED
+        && requestCode != Constants.REQUEST_CODE_ACCOUNT_CHANGE) {
+      finish();
+    } else if (resultCode == Activity.RESULT_OK
+        && requestCode == Constants.REQUEST_CODE_ACCOUNT_CHANGE) {
+      setAccount(data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME));
+    } else if (resultCode == Activity.RESULT_OK
+        && requestCode == Constants.REQUEST_CODE_ACCOUNT_INIT) {
+      setAccount(AccountHelper.getFirstAccount(this).name);
+    }
+  }
 }

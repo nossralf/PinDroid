@@ -26,67 +26,80 @@ import android.sax.EndTextElementListener;
 import android.sax.RootElement;
 import android.sax.StartElementListener;
 import android.util.Xml;
-
 import com.pindroid.providers.NoteContent.Note;
 import com.pindroid.util.DateParser;
-
-import org.xml.sax.Attributes;
-
 import java.io.InputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
+import org.xml.sax.Attributes;
 
 public class SaxNoteListParser {
 
-	private InputStream is;
-	
-    public SaxNoteListParser(InputStream stream) {
-    	is = stream;
-    }
+  private InputStream is;
 
-    public ArrayList<Note> parse() throws ParseException {
-        final Note currentNote = new Note();
-        final RootElement root = new RootElement("notes");
-        final ArrayList<Note> notes = new ArrayList<Note>();
+  public SaxNoteListParser(InputStream stream) {
+    is = stream;
+  }
 
-        root.getChild("note").setStartElementListener(new StartElementListener(){
-            public void start(Attributes attributes) {
-            	final String id = attributes.getValue("id");
-            	
-            	currentNote.setPid(id);
-            }
-        });
-        root.getChild("note").getChild("title").setEndTextElementListener(new EndTextElementListener(){
-            public void end(String body) {
-            	currentNote.setTitle(body);
-            }
-        });
-        root.getChild("note").getChild("hash").setEndTextElementListener(new EndTextElementListener(){
-            public void end(String body) {
-            	currentNote.setHash(body);
-            }
-        });
-        root.getChild("note").getChild("created_at").setEndTextElementListener(new EndTextElementListener(){
-            public void end(String body) {
-            	currentNote.setAdded(DateParser.parseTime(body));
-            }
-        });
-        root.getChild("note").getChild("updated_at").setEndTextElementListener(new EndTextElementListener(){
-            public void end(String body) {
-            	currentNote.setUpdated(DateParser.parseTime(body));
-            }
-        });
-        root.getChild("note").setEndElementListener(new EndElementListener(){
-            public void end() {
-            	notes.add(currentNote.copy());
-            	currentNote.clear();
-            }
-        });
-        try {
-            Xml.parse(is, Xml.Encoding.UTF_8, root.getContentHandler());
-        } catch (Exception e) {
-            throw new ParseException(e.getMessage(), 0);
-        }
-        return notes;
+  public ArrayList<Note> parse() throws ParseException {
+    final Note currentNote = new Note();
+    final RootElement root = new RootElement("notes");
+    final ArrayList<Note> notes = new ArrayList<Note>();
+
+    root.getChild("note")
+        .setStartElementListener(
+            new StartElementListener() {
+              public void start(Attributes attributes) {
+                final String id = attributes.getValue("id");
+
+                currentNote.setPid(id);
+              }
+            });
+    root.getChild("note")
+        .getChild("title")
+        .setEndTextElementListener(
+            new EndTextElementListener() {
+              public void end(String body) {
+                currentNote.setTitle(body);
+              }
+            });
+    root.getChild("note")
+        .getChild("hash")
+        .setEndTextElementListener(
+            new EndTextElementListener() {
+              public void end(String body) {
+                currentNote.setHash(body);
+              }
+            });
+    root.getChild("note")
+        .getChild("created_at")
+        .setEndTextElementListener(
+            new EndTextElementListener() {
+              public void end(String body) {
+                currentNote.setAdded(DateParser.parseTime(body));
+              }
+            });
+    root.getChild("note")
+        .getChild("updated_at")
+        .setEndTextElementListener(
+            new EndTextElementListener() {
+              public void end(String body) {
+                currentNote.setUpdated(DateParser.parseTime(body));
+              }
+            });
+    root.getChild("note")
+        .setEndElementListener(
+            new EndElementListener() {
+              public void end() {
+                notes.add(currentNote.copy());
+                currentNote.clear();
+              }
+            });
+    try {
+      Xml.parse(is, Xml.Encoding.UTF_8, root.getContentHandler());
+    } catch (Exception e) {
+      throw new ParseException(e.getMessage(), 0);
     }
+    return notes;
+  }
 }

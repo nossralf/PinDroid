@@ -26,128 +26,136 @@ import android.provider.BaseColumns;
 
 public class NoteContent {
 
-	public static class Note implements BaseColumns {
-		public static final Uri CONTENT_URI = Uri.parse("content://" + BookmarkContentProvider.AUTHORITY + "/note");
-		
-		public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.PinDroid.notes";
-		
-		public static final int NOTE_ID_PATH_POSITION = 1;
-		
-		public static final String Title = "TITLE";
-		public static final String Text = "TEXT";
-		public static final String Account = "ACCOUNT";
-		public static final String Added = "ADDED";
-		public static final String Updated = "UPDATED";
-		public static final String Hash = "HASH";
-		public static final String Pid = "PID";
-		
-        private String mTitle;
-        private String mText;
-        private String mHash;
-        private String mPid;
-        private int mId = 0;
-        private String mAccount = null;
-        private long mAdded = 0;
-        private long mUpdated = 0;
+  public static class Note implements BaseColumns {
+    public static final Uri CONTENT_URI =
+        Uri.parse("content://" + BookmarkContentProvider.AUTHORITY + "/note");
 
-        public int getId(){
-        	return mId;
-        }
-        
-        public void setId(int id){
-        	mId = id;
-        }
-        
-        public String getTitle() {
-            return mTitle;
-        }
+    public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.PinDroid.notes";
 
-        public void setTitle(String title) {
-        	mTitle = title;
-        }
-        
-        public String getText() {
-            return mText;
-        }
+    public static final int NOTE_ID_PATH_POSITION = 1;
 
-        public void setText(String text) {
-        	mText = text;
-        }
-        
-        public String getHash() {
-            return mHash;
-        }
+    public static final String Title = "TITLE";
+    public static final String Text = "TEXT";
+    public static final String Account = "ACCOUNT";
+    public static final String Added = "ADDED";
+    public static final String Updated = "UPDATED";
+    public static final String Hash = "HASH";
+    public static final String Pid = "PID";
 
-        public void setHash(String hash) {
-        	mHash = hash;
-        }
-        
-        public String getPid() {
-            return mPid;
-        }
+    private String mTitle;
+    private String mText;
+    private String mHash;
+    private String mPid;
+    private int mId = 0;
+    private String mAccount = null;
+    private long mAdded = 0;
+    private long mUpdated = 0;
 
-        public void setPid(String pid) {
-        	mPid = pid;
-        }
-        
-        public String getAccount(){
-        	return mAccount;
-        }
-        
-        public void setAccount(String account) {
-        	mAccount = account;
-        }
-        
-        public long getAdded(){
-        	return mAdded;
-        }
-        
-        public void setAdded(long added) {
-        	mAdded = added;
-        }
-        
-        public long getUpdated(){
-        	return mUpdated;
-        }
-        
-        public void setUpdated(long updated) {
-        	mUpdated = updated;
-        }
-        
-        public Note() {
-        }
-        
-        public Note(int id, String title, String text, String account, String hash, String pid, long added, long updated) {
-        	mId = id;
-            mTitle = title;
-            mText = text;
-            mAccount = account;
-            mHash = hash;
-            mPid = pid;
-            mAdded = added;
-            mUpdated = updated;
-        }
-        
-        public Note copy() {
-        	Note n = new Note();
-        	n.mTitle = this.mTitle;
-        	n.mId = this.mId;
-        	n.mText = this.mText;
-        	n.mHash = this.mHash;
-        	n.mPid = this.mPid;
-        	n.mAdded = this.mAdded;
-        	n.mUpdated = this.mUpdated;
-        	return n;
-        }
-        
-        public void clear() {
-        	mTitle = null;
-        	mId = 0;
-        	mText = null;
-        	mHash = null;
-        	mPid = null;
-        	mAdded = 0;
-        	mUpdated = 0;
-        }
-	}
+    public int getId() {
+      return mId;
+    }
+
+    public void setId(int id) {
+      mId = id;
+    }
+
+    public String getTitle() {
+      return mTitle;
+    }
+
+    public void setTitle(String title) {
+      mTitle = title;
+    }
+
+    public String getText() {
+      return mText;
+    }
+
+    public void setText(String text) {
+      mText = text;
+    }
+
+    public String getHash() {
+      return mHash;
+    }
+
+    public void setHash(String hash) {
+      mHash = hash;
+    }
+
+    public String getPid() {
+      return mPid;
+    }
+
+    public void setPid(String pid) {
+      mPid = pid;
+    }
+
+    public String getAccount() {
+      return mAccount;
+    }
+
+    public void setAccount(String account) {
+      mAccount = account;
+    }
+
+    public long getAdded() {
+      return mAdded;
+    }
+
+    public void setAdded(long added) {
+      mAdded = added;
+    }
+
+    public long getUpdated() {
+      return mUpdated;
+    }
+
+    public void setUpdated(long updated) {
+      mUpdated = updated;
+    }
+
+    public Note() {}
+
+    public Note(
+        int id,
+        String title,
+        String text,
+        String account,
+        String hash,
+        String pid,
+        long added,
+        long updated) {
+      mId = id;
+      mTitle = title;
+      mText = text;
+      mAccount = account;
+      mHash = hash;
+      mPid = pid;
+      mAdded = added;
+      mUpdated = updated;
+    }
+
+    public Note copy() {
+      Note n = new Note();
+      n.mTitle = this.mTitle;
+      n.mId = this.mId;
+      n.mText = this.mText;
+      n.mHash = this.mHash;
+      n.mPid = this.mPid;
+      n.mAdded = this.mAdded;
+      n.mUpdated = this.mUpdated;
+      return n;
+    }
+
+    public void clear() {
+      mTitle = null;
+      mId = 0;
+      mText = null;
+      mHash = null;
+      mPid = null;
+      mAdded = 0;
+      mUpdated = 0;
+    }
+  }
 }

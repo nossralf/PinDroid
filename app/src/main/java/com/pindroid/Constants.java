@@ -25,63 +25,68 @@ import android.net.Uri;
 
 public class Constants {
 
-    /**
-     * Account type string.
-     */
-    public static final String ACCOUNT_TYPE = "com.pindroid";
-    
-    public static final Uri CONTENT_URI_BASE = Uri.parse("content://com.pindroid");
-    
-    public static final String INTENT_URI = "com.pindroid.intent";
-    
-    public static final String CONTENT_SCHEME = "content";
-    
-    public static final String EXTRA_BOOKMARK = "com.pindroid.Bookmark";
-    public static final String EXTRA_DESCRIPTION = "com.pindroid.bookmark.Description";
-    public static final String EXTRA_NOTES = "com.pindroid.bookmark.Notes";
-    public static final String EXTRA_TAGS = "com.pindroid.bookmark.Tags";
-    public static final String EXTRA_PRIVATE = "com.pindroid.bookmark.Private";
-    public static final String EXTRA_TOREAD = "com.pindroid.bookmark.ToRead";
-    public static final String EXTRA_ERROR = "com.pindroid.bookmark.Error";
-    public static final String EXTRA_TIME = "com.pindroid.bookmark.Time";
-    public static final String EXTRA_UPDATE = "com.pindroid.bookmark.Update";
-    public static final String EXTRA_VIEWTYPE = "com.pindroid.bookmark.ViewType";
-    public static final String EXTRA_INTERNAL = "com.pindroid.Internal";
-    public static final String EXTRA_READVIEW = "com.pindroid.ReadView";
-    
-    public static final String ACTION_READLATER = "com.pindroid.action.ReadLater";
-    
-    public static final String SYNC_MARKER_KEY = "com.pindroid.BookmarkSyncAdapter.marker";
-    
-    public static final int HTTP_STATUS_TOO_MANY_REQUESTS = 429;
+  /** Account type string. */
+  public static final String ACCOUNT_TYPE = "com.pindroid";
 
-    public static final int BOOKMARK_PAGE_SIZE = 500;
-    
-    public static final String ACTION_SEARCH_SUGGESTION_VIEW = "com.pindroid.intent.action.SearchSuggestionView";
-    public static final String ACTION_SEARCH_SUGGESTION_EDIT = "com.pindroid.intent.action.SearchSuggestionEdit";
-    
-    public static final int REQUEST_CODE_ACCOUNT_CHANGE = 1;
-    public static final int REQUEST_CODE_ACCOUNT_INIT = 2;
-    
-    /**
-     * Authtoken type string.
-     */
-    public static final String AUTHTOKEN_TYPE = "com.pindroid";
-    
-    public static final String PREFS_AUTH_TYPE = "authentication_type";
-    public static final String AUTH_TYPE_PINBOARD = "pinboard";
-    
-    public static final String PREFS_SECRET_TOKEN = "secret_token";
-    
-    public static final String TEXT_EXTRACTOR_URL = "http://viewtext.org/api/text?url=";
-    
-    public static final String GPL_URL = "http://www.gnu.org/licenses/gpl-3.0.txt";
-    public static final String ABOUT_URL = "https://github.com/maxpower47/PinDroid";
-    public static final String MANUAL_URL = "https://github.com/maxpower47/PinDroid/wiki";
-    public static final String PRIVACY_URL = "https://github.com/maxpower47/PinDroid/wiki/Privacy-Policy";
-    public static final String DONATION_URL = "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EUS2Z3WVWK6ZU";
-    
-    public static final String INSTAPAPER_URL = "http://www.instapaper.com/text?u=";
-    
-    public static enum BookmarkViewType {VIEW, READ, WEB, EDIT};
+  public static final Uri CONTENT_URI_BASE = Uri.parse("content://com.pindroid");
+
+  public static final String INTENT_URI = "com.pindroid.intent";
+
+  public static final String CONTENT_SCHEME = "content";
+
+  public static final String EXTRA_BOOKMARK = "com.pindroid.Bookmark";
+  public static final String EXTRA_DESCRIPTION = "com.pindroid.bookmark.Description";
+  public static final String EXTRA_NOTES = "com.pindroid.bookmark.Notes";
+  public static final String EXTRA_TAGS = "com.pindroid.bookmark.Tags";
+  public static final String EXTRA_PRIVATE = "com.pindroid.bookmark.Private";
+  public static final String EXTRA_TOREAD = "com.pindroid.bookmark.ToRead";
+  public static final String EXTRA_ERROR = "com.pindroid.bookmark.Error";
+  public static final String EXTRA_TIME = "com.pindroid.bookmark.Time";
+  public static final String EXTRA_UPDATE = "com.pindroid.bookmark.Update";
+  public static final String EXTRA_VIEWTYPE = "com.pindroid.bookmark.ViewType";
+  public static final String EXTRA_INTERNAL = "com.pindroid.Internal";
+  public static final String EXTRA_READVIEW = "com.pindroid.ReadView";
+
+  public static final String ACTION_READLATER = "com.pindroid.action.ReadLater";
+
+  public static final String SYNC_MARKER_KEY = "com.pindroid.BookmarkSyncAdapter.marker";
+
+  public static final int HTTP_STATUS_TOO_MANY_REQUESTS = 429;
+
+  public static final int BOOKMARK_PAGE_SIZE = 500;
+
+  public static final String ACTION_SEARCH_SUGGESTION_VIEW =
+      "com.pindroid.intent.action.SearchSuggestionView";
+  public static final String ACTION_SEARCH_SUGGESTION_EDIT =
+      "com.pindroid.intent.action.SearchSuggestionEdit";
+
+  public static final int REQUEST_CODE_ACCOUNT_CHANGE = 1;
+  public static final int REQUEST_CODE_ACCOUNT_INIT = 2;
+
+  /** Authtoken type string. */
+  public static final String AUTHTOKEN_TYPE = "com.pindroid";
+
+  public static final String PREFS_AUTH_TYPE = "authentication_type";
+  public static final String AUTH_TYPE_PINBOARD = "pinboard";
+
+  public static final String PREFS_SECRET_TOKEN = "secret_token";
+
+  public static final String TEXT_EXTRACTOR_URL = "http://viewtext.org/api/text?url=";
+
+  public static final String GPL_URL = "http://www.gnu.org/licenses/gpl-3.0.txt";
+  public static final String ABOUT_URL = "https://github.com/maxpower47/PinDroid";
+  public static final String MANUAL_URL = "https://github.com/maxpower47/PinDroid/wiki";
+  public static final String PRIVACY_URL =
+      "https://github.com/maxpower47/PinDroid/wiki/Privacy-Policy";
+  public static final String DONATION_URL =
+      "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EUS2Z3WVWK6ZU";
+
+  public static final String INSTAPAPER_URL = "http://www.instapaper.com/text?u=";
+
+  public static enum BookmarkViewType {
+    VIEW,
+    READ,
+    WEB,
+    EDIT
+  };
 }

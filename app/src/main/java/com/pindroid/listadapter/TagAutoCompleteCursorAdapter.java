@@ -23,18 +23,17 @@ package com.pindroid.listadapter;
 
 import android.content.Context;
 import android.database.Cursor;
-
-import com.pindroid.providers.TagContent.Tag;
-
 import androidx.cursoradapter.widget.SimpleCursorAdapter;
+import com.pindroid.providers.TagContent.Tag;
 
 public class TagAutoCompleteCursorAdapter extends SimpleCursorAdapter {
 
-	public TagAutoCompleteCursorAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags) {
-		super(context, layout, c, from, to, flags);
-	}
-	
-	public CharSequence convertToString(Cursor cursor) {
-		return cursor.getString(cursor.getColumnIndex(Tag.Name));
-	}
+  public TagAutoCompleteCursorAdapter(
+      Context context, int layout, Cursor c, String[] from, int[] to, int flags) {
+    super(context, layout, c, from, to, flags);
+  }
+
+  public CharSequence convertToString(Cursor cursor) {
+    return cursor.getString(cursor.getColumnIndex(Tag.Name));
+  }
 }

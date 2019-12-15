@@ -22,18 +22,16 @@
 package com.pindroid.activity;
 
 import android.os.Bundle;
-
-import com.pindroid.R;
-
 import androidx.appcompat.app.AppCompatActivity;
+import com.pindroid.R;
 
 public class Settings extends AppCompatActivity {
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings_activity);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.settings_activity);
+    getSupportActionBar().setHomeButtonEnabled(true);
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+  }
 }

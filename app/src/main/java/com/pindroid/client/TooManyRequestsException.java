@@ -23,18 +23,16 @@ package com.pindroid.client;
 
 public class TooManyRequestsException extends Exception {
 
-	private static final long serialVersionUID = 1L;
-	private int backoff = 0;
-	
-	public int getBackoff(){
-		return backoff;
-	}
-	
-	public TooManyRequestsException(){
-		
-	}
-	
-	public TooManyRequestsException(int backoff){
-		this.backoff = backoff;
-	}
+  private static final long serialVersionUID = 1L;
+  private int backoff = 0;
+
+  public int getBackoff() {
+    return backoff;
+  }
+
+  public TooManyRequestsException() {}
+
+  public TooManyRequestsException(int backoff) {
+    this.backoff = backoff;
+  }
 }

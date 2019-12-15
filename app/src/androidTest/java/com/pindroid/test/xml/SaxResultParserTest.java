@@ -21,59 +21,57 @@
 
 package com.pindroid.test.xml;
 
+import static org.junit.Assert.assertEquals;
+
 import com.pindroid.client.PinboardApiResult;
 import com.pindroid.xml.SaxResultParser;
-
-import org.junit.Test;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 public class SaxResultParserTest {
-	
-	private String doneTest = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><result code=\"done\" />";
-	private String errorTest = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><result code=\"something went wrong\" />";
 
-	@Test
-	public void testResultDoneParsing() throws ParseException{
+  private String doneTest = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><result code=\"done\" />";
+  private String errorTest =
+      "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><result code=\"something went wrong\" />";
 
-		InputStream is = new ByteArrayInputStream( doneTest.getBytes() );
-		
-		SaxResultParser parser = new SaxResultParser(is);
-		
-		PinboardApiResult r = parser.parse();
-			
-		assertEquals("done", r.getCode());
-		
-		try {
-			is.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+  @Test
+  public void testResultDoneParsing() throws ParseException {
 
-	@Test
-	public void testResultErrorParsing() throws ParseException{
+    InputStream is = new ByteArrayInputStream(doneTest.getBytes());
 
-		InputStream is = new ByteArrayInputStream( errorTest.getBytes() );
-		
-		SaxResultParser parser = new SaxResultParser(is);
-		
-		PinboardApiResult r = parser.parse();
-			
-		assertEquals("something went wrong", r.getCode());
-		
-		try {
-			is.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+    SaxResultParser parser = new SaxResultParser(is);
 
+    PinboardApiResult r = parser.parse();
+
+    assertEquals("done", r.getCode());
+
+    try {
+      is.close();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+  }
+
+  @Test
+  public void testResultErrorParsing() throws ParseException {
+
+    InputStream is = new ByteArrayInputStream(errorTest.getBytes());
+
+    SaxResultParser parser = new SaxResultParser(is);
+
+    PinboardApiResult r = parser.parse();
+
+    assertEquals("something went wrong", r.getCode());
+
+    try {
+      is.close();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+  }
 }

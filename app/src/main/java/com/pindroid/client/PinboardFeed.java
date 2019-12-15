@@ -23,174 +23,169 @@ package com.pindroid.client;
 
 import android.database.Cursor;
 import android.util.Log;
-
 import com.pindroid.xml.SaxFeedParser;
-
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.ParseException;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.auth.AuthenticationException;
 import org.apache.http.client.methods.HttpGet;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.ParseException;
-
 public class PinboardFeed {
-    private static final String TAG = "PinboardFeed";
+  private static final String TAG = "PinboardFeed";
 
-    public static final String FETCH_RECENT_URI = "http://feeds.pinboard.in/rss/recent/";
-    public static final String FETCH_POPULAR_URI = "http://feeds.pinboard.in/rss/popular/";
-    public static final String FETCH_RECENT_USER_URI = "http://feeds.pinboard.in/rss";
-    public static final String FETCH_NETWORK_URI = "http://feeds.pinboard.in/rss/";
-    
-    /**
-     * Retrieves a list of recent bookmarks for Pinboard.
-     * 
-     * @return The list of bookmarks received from the server.
-     * @throws JSONException If an error was encountered in deserializing the JSON object returned from 
-     * the server.
-     * @throws IOException If a server error was encountered.
-     * @throws AuthenticationException If an authentication error was encountered.
-     */
-    public static Cursor fetchRecent()
-    	throws IOException, ParseException {
+  public static final String FETCH_RECENT_URI = "http://feeds.pinboard.in/rss/recent/";
+  public static final String FETCH_POPULAR_URI = "http://feeds.pinboard.in/rss/popular/";
+  public static final String FETCH_RECENT_USER_URI = "http://feeds.pinboard.in/rss";
+  public static final String FETCH_NETWORK_URI = "http://feeds.pinboard.in/rss/";
 
-        final HttpGet post = new HttpGet(FETCH_RECENT_URI);
-        
-        Cursor bookmarkList = null;
+  /**
+   * Retrieves a list of recent bookmarks for Pinboard.
+   *
+   * @return The list of bookmarks received from the server.
+   * @throws JSONException If an error was encountered in deserializing the JSON object returned
+   *     from the server.
+   * @throws IOException If a server error was encountered.
+   * @throws AuthenticationException If an authentication error was encountered.
+   */
+  public static Cursor fetchRecent() throws IOException, ParseException {
 
-        final HttpResponse resp = HttpClientFactory.getThreadSafeClient().execute(post);
-        InputStream responseStream = resp.getEntity().getContent();
+    final HttpGet post = new HttpGet(FETCH_RECENT_URI);
 
-        if (resp.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-        	SaxFeedParser parser = new SaxFeedParser(responseStream);
+    Cursor bookmarkList = null;
 
-			bookmarkList = parser.parse();
+    final HttpResponse resp = HttpClientFactory.getThreadSafeClient().execute(post);
+    InputStream responseStream = resp.getEntity().getContent();
 
-        } else {
-        	Log.e(TAG, "Server error in fetching network recent list");
-            throw new IOException();
-        }
+    if (resp.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+      SaxFeedParser parser = new SaxFeedParser(responseStream);
 
-        return bookmarkList;
+      bookmarkList = parser.parse();
+
+    } else {
+      Log.e(TAG, "Server error in fetching network recent list");
+      throw new IOException();
     }
-    
-    /**
-     * Retrieves a list of popular bookmarks for Pinboard.
-     * 
-     * @return The list of bookmarks received from the server.
-     * @throws JSONException If an error was encountered in deserializing the JSON object returned from 
-     * the server.
-     * @throws IOException If a server error was encountered.
-     * @throws AuthenticationException If an authentication error was encountered.
-     */
-    public static Cursor fetchPopular()
-    	throws IOException, ParseException {
 
-        final HttpGet post = new HttpGet(FETCH_POPULAR_URI);
-        
-        Cursor bookmarkList = null;
+    return bookmarkList;
+  }
 
-        final HttpResponse resp = HttpClientFactory.getThreadSafeClient().execute(post);
-        InputStream responseStream = resp.getEntity().getContent();
+  /**
+   * Retrieves a list of popular bookmarks for Pinboard.
+   *
+   * @return The list of bookmarks received from the server.
+   * @throws JSONException If an error was encountered in deserializing the JSON object returned
+   *     from the server.
+   * @throws IOException If a server error was encountered.
+   * @throws AuthenticationException If an authentication error was encountered.
+   */
+  public static Cursor fetchPopular() throws IOException, ParseException {
 
-        if (resp.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-        	SaxFeedParser parser = new SaxFeedParser(responseStream);
+    final HttpGet post = new HttpGet(FETCH_POPULAR_URI);
 
-			bookmarkList = parser.parse();
+    Cursor bookmarkList = null;
 
-        } else {
-        	Log.e(TAG, "Server error in fetching network popular list");
-            throw new IOException();
-        }
+    final HttpResponse resp = HttpClientFactory.getThreadSafeClient().execute(post);
+    InputStream responseStream = resp.getEntity().getContent();
 
-        return bookmarkList;
+    if (resp.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+      SaxFeedParser parser = new SaxFeedParser(responseStream);
+
+      bookmarkList = parser.parse();
+
+    } else {
+      Log.e(TAG, "Server error in fetching network popular list");
+      throw new IOException();
     }
-    
-    /**
-     * Retrieves a list of recent bookmarks for a Pinboard user.
-     * 
-     * @return The list of bookmarks received from the server.
-     * @throws JSONException If an error was encountered in deserializing the JSON object returned from 
-     * the server.
-     * @throws IOException If a server error was encountered.
-     * @throws AuthenticationException If an authentication error was encountered.
-     */
-    public static Cursor fetchUserRecent(String username, String tagname)
-    	throws IOException, ParseException {
-    	
-    	String url = FETCH_RECENT_USER_URI;
-    	
-    	if(username != null && username != ""){
-    		url += "/u:" + username;
-    	}
-    	if(tagname != null && tagname != "") {
-    		for(String s : tagname.split(" ")) {
-    			url += "/t:" + s;
-    		}	
-    	}
 
-        final HttpGet post = new HttpGet(url.trim());
-        
-        Cursor bookmarkList = null;
+    return bookmarkList;
+  }
 
-        final HttpResponse resp = HttpClientFactory.getThreadSafeClient().execute(post);
-        InputStream responseStream = resp.getEntity().getContent();
+  /**
+   * Retrieves a list of recent bookmarks for a Pinboard user.
+   *
+   * @return The list of bookmarks received from the server.
+   * @throws JSONException If an error was encountered in deserializing the JSON object returned
+   *     from the server.
+   * @throws IOException If a server error was encountered.
+   * @throws AuthenticationException If an authentication error was encountered.
+   */
+  public static Cursor fetchUserRecent(String username, String tagname)
+      throws IOException, ParseException {
 
-        if (resp.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-        	SaxFeedParser parser = new SaxFeedParser(responseStream);
+    String url = FETCH_RECENT_USER_URI;
 
-			bookmarkList = parser.parse();
-
-        } else {
-        	Log.e(TAG, "Server error in fetching network recent list");
-            throw new IOException();
-        }
-
-        return bookmarkList;
+    if (username != null && username != "") {
+      url += "/u:" + username;
     }
-    
-    /**
-     * Retrieves a list of recent bookmarks for a Pinboard users network.
-     * 
-     * @return The list of bookmarks received from the server.
-     * @throws IOException If a server error was encountered.
-     * @throws AuthenticationException If an authentication error was encountered.
-     */
-    public static Cursor fetchNetworkRecent(String username, String secretToken)
-    	throws IOException, ParseException {
-    	
-    	String url = FETCH_RECENT_USER_URI;
-    	
-    	if(secretToken != null && secretToken != ""){
-    		url += "/secret:" + secretToken;
-    	}
-    	
-    	if(username != null && username != ""){
-    		url += "/u:" + username;
-    	}
-    	
-    	url += "/network/";
-    	
-    	Log.d("network", url);
-
-        final HttpGet post = new HttpGet(url);
-        
-        Cursor bookmarkList = null;
-
-        final HttpResponse resp = HttpClientFactory.getThreadSafeClient().execute(post);
-        InputStream responseStream = resp.getEntity().getContent();
-
-        if (resp.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-        	SaxFeedParser parser = new SaxFeedParser(responseStream);
-
-			bookmarkList = parser.parse();
-
-        } else {
-        	Log.e(TAG, "Server error in fetching network recent list");
-            throw new IOException();
-        }
-
-        return bookmarkList;
+    if (tagname != null && tagname != "") {
+      for (String s : tagname.split(" ")) {
+        url += "/t:" + s;
+      }
     }
+
+    final HttpGet post = new HttpGet(url.trim());
+
+    Cursor bookmarkList = null;
+
+    final HttpResponse resp = HttpClientFactory.getThreadSafeClient().execute(post);
+    InputStream responseStream = resp.getEntity().getContent();
+
+    if (resp.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+      SaxFeedParser parser = new SaxFeedParser(responseStream);
+
+      bookmarkList = parser.parse();
+
+    } else {
+      Log.e(TAG, "Server error in fetching network recent list");
+      throw new IOException();
+    }
+
+    return bookmarkList;
+  }
+
+  /**
+   * Retrieves a list of recent bookmarks for a Pinboard users network.
+   *
+   * @return The list of bookmarks received from the server.
+   * @throws IOException If a server error was encountered.
+   * @throws AuthenticationException If an authentication error was encountered.
+   */
+  public static Cursor fetchNetworkRecent(String username, String secretToken)
+      throws IOException, ParseException {
+
+    String url = FETCH_RECENT_USER_URI;
+
+    if (secretToken != null && secretToken != "") {
+      url += "/secret:" + secretToken;
+    }
+
+    if (username != null && username != "") {
+      url += "/u:" + username;
+    }
+
+    url += "/network/";
+
+    Log.d("network", url);
+
+    final HttpGet post = new HttpGet(url);
+
+    Cursor bookmarkList = null;
+
+    final HttpResponse resp = HttpClientFactory.getThreadSafeClient().execute(post);
+    InputStream responseStream = resp.getEntity().getContent();
+
+    if (resp.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+      SaxFeedParser parser = new SaxFeedParser(responseStream);
+
+      bookmarkList = parser.parse();
+
+    } else {
+      Log.e(TAG, "Server error in fetching network recent list");
+      throw new IOException();
+    }
+
+    return bookmarkList;
+  }
 }

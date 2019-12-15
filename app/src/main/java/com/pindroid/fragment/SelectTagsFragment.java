@@ -29,144 +29,143 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-
-import com.pindroid.R;
-import com.pindroid.platform.TagManager;
-import com.pindroid.providers.TagContent.Tag;
-import com.pindroid.util.SettingsHelper;
-
-import java.util.HashSet;
-import java.util.Set;
-
 import androidx.cursoradapter.widget.SimpleCursorAdapter;
 import androidx.fragment.app.ListFragment;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
+import com.pindroid.R;
+import com.pindroid.platform.TagManager;
+import com.pindroid.providers.TagContent.Tag;
+import com.pindroid.util.SettingsHelper;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SelectTagsFragment extends ListFragment
-	implements LoaderManager.LoaderCallbacks<Cursor>, PindroidFragment  {
+    implements LoaderManager.LoaderCallbacks<Cursor>, PindroidFragment {
 
-	private String sortfield = Tag.Name + " ASC";
-	private SimpleCursorAdapter mAdapter;
-	
-	private String username = null;
-	
-	private OnTagsSelectedListener tagsSelectedListener;
-	private OnItemClickListener clickListener;
-	
-	public interface OnTagsSelectedListener {
-		public void onTagsSelected(Set<String> tags);
-	}
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState){
-		super.onCreate(savedInstanceState);
-		setRetainInstance(true);
-	}
-	
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState){
-		super.onActivityCreated(savedInstanceState);
+  private String sortfield = Tag.Name + " ASC";
+  private SimpleCursorAdapter mAdapter;
 
-        setHasOptionsMenu(true);
+  private String username = null;
 
-		mAdapter = new SimpleCursorAdapter(this.getActivity(),
-                android.R.layout.simple_list_item_multiple_choice, null,
-				new String[] {Tag.Name}, new int[] {android.R.id.text1}, 0);
+  private OnTagsSelectedListener tagsSelectedListener;
+  private OnItemClickListener clickListener;
 
-		setListAdapter(mAdapter);
+  public interface OnTagsSelectedListener {
+    public void onTagsSelected(Set<String> tags);
+  }
 
-		getLoaderManager().initLoader(0, null, this);
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setRetainInstance(true);
+  }
 
-		ListView lv = getListView();
-		lv.setTextFilterEnabled(true);
-		lv.setFastScrollEnabled(true);
+  @Override
+  public void onActivityCreated(Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
 
-		lv.setItemsCanFocus(false);
-        lv.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+    setHasOptionsMenu(true);
 
+    mAdapter =
+        new SimpleCursorAdapter(
+            this.getActivity(),
+            android.R.layout.simple_list_item_multiple_choice,
+            null,
+            new String[] {Tag.Name},
+            new int[] {android.R.id.text1},
+            0);
 
-	}
-	
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	
-	public String getAccount(){
-		return username;
-	}
-	
-	public void refresh(){
-		try{
-			getLoaderManager().restartLoader(0, null, this);
-		} catch(Exception e){}
-	}
+    setListAdapter(mAdapter);
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.select_tags_menu, menu);
+    getLoaderManager().initLoader(0, null, this);
+
+    ListView lv = getListView();
+    lv.setTextFilterEnabled(true);
+    lv.setFastScrollEnabled(true);
+
+    lv.setItemsCanFocus(false);
+    lv.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  public String getAccount() {
+    return username;
+  }
+
+  public void refresh() {
+    try {
+      getLoaderManager().restartLoader(0, null, this);
+    } catch (Exception e) {
     }
+  }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.menu_selecttags_ok:
+  @Override
+  public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    super.onCreateOptionsMenu(menu, inflater);
+    inflater.inflate(R.menu.select_tags_menu, menu);
+  }
 
-                Set<String> tags = new HashSet<String>();
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    // Handle item selection
+    switch (item.getItemId()) {
+      case R.id.menu_selecttags_ok:
+        Set<String> tags = new HashSet<String>();
 
-                SparseBooleanArray checked = getListView().getCheckedItemPositions();
+        SparseBooleanArray checked = getListView().getCheckedItemPositions();
 
-                for(int i = 0; i < getListAdapter().getCount(); i++) {
-                    if(checked.get(i)) {
-                        Cursor c = (Cursor) getListAdapter().getItem(i);
-                        String n = c.getString(c.getColumnIndex(Tag.Name));
-
-                        tags.add(n);
-                    }
-                }
-
-                tagsSelectedListener.onTagsSelected(tags);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-	
-	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-		if(username != null) {
-			return TagManager.GetTags(username, sortfield, this.getActivity());
-		}
-		else return null;
-	}
-	
-	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-	    mAdapter.swapCursor(data);
-
-        Set<String> tags = SettingsHelper.getDrawerTags(getActivity());
-
-        for(int i = 0; i < getListAdapter().getCount(); i++) {
+        for (int i = 0; i < getListAdapter().getCount(); i++) {
+          if (checked.get(i)) {
             Cursor c = (Cursor) getListAdapter().getItem(i);
             String n = c.getString(c.getColumnIndex(Tag.Name));
 
-            if(tags.contains(n)) {
-                getListView().setItemChecked(i, true);
-            }
+            tags.add(n);
+          }
         }
-	}
-	
-	public void onLoaderReset(Loader<Cursor> loader) {
-	    mAdapter.swapCursor(null);
-	}
-	
-	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		try {
-			tagsSelectedListener = (OnTagsSelectedListener) activity;
-		} catch (ClassCastException e) {
-			throw new ClassCastException(activity.toString() + " must implement OnTagSelectedListener");
-		}
-	}
+
+        tagsSelectedListener.onTagsSelected(tags);
+        return true;
+      default:
+        return super.onOptionsItemSelected(item);
+    }
+  }
+
+  public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+    if (username != null) {
+      return TagManager.GetTags(username, sortfield, this.getActivity());
+    } else return null;
+  }
+
+  public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    mAdapter.swapCursor(data);
+
+    Set<String> tags = SettingsHelper.getDrawerTags(getActivity());
+
+    for (int i = 0; i < getListAdapter().getCount(); i++) {
+      Cursor c = (Cursor) getListAdapter().getItem(i);
+      String n = c.getString(c.getColumnIndex(Tag.Name));
+
+      if (tags.contains(n)) {
+        getListView().setItemChecked(i, true);
+      }
+    }
+  }
+
+  public void onLoaderReset(Loader<Cursor> loader) {
+    mAdapter.swapCursor(null);
+  }
+
+  @Override
+  public void onAttach(Activity activity) {
+    super.onAttach(activity);
+    try {
+      tagsSelectedListener = (OnTagsSelectedListener) activity;
+    } catch (ClassCastException e) {
+      throw new ClassCastException(activity.toString() + " must implement OnTagSelectedListener");
+    }
+  }
 }

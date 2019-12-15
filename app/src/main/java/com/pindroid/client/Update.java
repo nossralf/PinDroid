@@ -22,17 +22,15 @@
 package com.pindroid.client;
 
 public class Update {
-	private long lastUpdate;
-	
-	public long getLastUpdate(){
-		return lastUpdate;
-	}
-	
-	public void setLastUpdate(long lastUpdate){
-		this.lastUpdate = lastUpdate;
-	}
-	
-	public Update(){
-		
-	}	
+  private long lastUpdate;
+
+  public long getLastUpdate() {
+    return lastUpdate;
+  }
+
+  public void setLastUpdate(long lastUpdate) {
+    this.lastUpdate = lastUpdate;
+  }
+
+  public Update() {}
 }

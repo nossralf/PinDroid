@@ -25,22 +25,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringUtils {
-    public static String getUrl(String s) {
-    	String result = "";
-    	
-    	Pattern pattern = Pattern.compile("\\b(https?|ftp|file)://[-a-zA-Z0-9+&@'#/%?=~_|!:,.;()]*[-a-zA-Z0-9+&@'#/%=~_|()]");
-    	
-    	try{
-	    	Matcher matcher = pattern.matcher(s);
-	    	
-	    	if(matcher.find()) {
-	    		result = s.substring(matcher.start(), matcher.end());    		
-	    	}
-    	}
-    	catch(Exception e){
-    		result = "";
-    	}
-    	
-    	return result;
+  public static String getUrl(String s) {
+    String result = "";
+
+    Pattern pattern =
+        Pattern.compile(
+            "\\b(https?|ftp|file)://[-a-zA-Z0-9+&@'#/%?=~_|!:,.;()]*[-a-zA-Z0-9+&@'#/%=~_|()]");
+
+    try {
+      Matcher matcher = pattern.matcher(s);
+
+      if (matcher.find()) {
+        result = s.substring(matcher.start(), matcher.end());
+      }
+    } catch (Exception e) {
+      result = "";
     }
+
+    return result;
+  }
 }

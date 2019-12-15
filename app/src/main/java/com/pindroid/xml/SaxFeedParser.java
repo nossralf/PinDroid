@@ -28,80 +28,114 @@ import android.sax.EndElementListener;
 import android.sax.EndTextElementListener;
 import android.sax.RootElement;
 import android.util.Xml;
-
 import com.pindroid.providers.BookmarkContent.Bookmark;
 import com.pindroid.util.DateParser;
-
 import java.io.InputStream;
 import java.text.ParseException;
 
 public class SaxFeedParser {
 
-	private InputStream is;
-	static final String nsRdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
-	static final String nsDc = "http://purl.org/dc/elements/1.1/";
-	static final String ns = "http://purl.org/rss/1.0/";
-	
-    public SaxFeedParser(InputStream stream) {
-    	is = stream;
-    }
+  private InputStream is;
+  static final String nsRdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+  static final String nsDc = "http://purl.org/dc/elements/1.1/";
+  static final String ns = "http://purl.org/rss/1.0/";
 
-    public Cursor parse() throws ParseException {
-        final Bookmark currentBookmark = new Bookmark();
-        final RootElement root = new RootElement(nsRdf, "RDF");
-        final Element item = root.getChild(ns, "item");
-        final MatrixCursor bookmarks = new MatrixCursor(new String[] {Bookmark._ID, Bookmark.Url, 
-        		Bookmark.Description, Bookmark.Meta, Bookmark.Tags, Bookmark.ToRead, Bookmark.Shared,
-        		Bookmark.Notes, Bookmark.Time, Bookmark.Account, Bookmark.Hash});
-        
-        item.setEndElementListener(new EndElementListener(){
-            public void end() {
-            	if(currentBookmark.getDescription() == null || currentBookmark.getDescription().equals(""))
-            		currentBookmark.setDescription(currentBookmark.getUrl());
-            	
-                bookmarks.addRow(new Object[]{0, currentBookmark.getUrl(), currentBookmark.getDescription(),
-                		currentBookmark.getMeta(), currentBookmark.getTagString(), currentBookmark.getToRead() ? 1 : 0,
-                		currentBookmark.getShared() ? 1 : 0, currentBookmark.getNotes(),
-                		currentBookmark.getTime(), currentBookmark.getAccount(), null});
-                currentBookmark.clear();
-            }
-        });
-        item.getChild(ns, "title").setEndTextElementListener(new EndTextElementListener(){
-            public void end(String body) {
-            	currentBookmark.setDescription(body);
-            }
-        });
-        item.getChild(nsDc, "date").setEndTextElementListener(new EndTextElementListener(){
-            public void end(String body) {
-				currentBookmark.setTime(DateParser.parseTime(body.trim()));
-            }
-        });
-        item.getChild(ns, "link").setEndTextElementListener(new EndTextElementListener(){
-            public void end(String body) {
-            	currentBookmark.setUrl(body);
-            }
-        });
-        item.getChild(nsDc, "creator").setEndTextElementListener(new EndTextElementListener(){
-            public void end(String body) {
-            	currentBookmark.setAccount(body);
-            }
-        });
-        item.getChild(ns, "description").setEndTextElementListener(new EndTextElementListener(){
-            public void end(String body) {
-            	currentBookmark.setNotes(body.trim());
-            }
-        });
-        item.getChild(nsDc, "subject").setEndTextElementListener(new EndTextElementListener(){
-            public void end(String body) {
-            	currentBookmark.setTagString(body.trim());
-            }
-        });
+  public SaxFeedParser(InputStream stream) {
+    is = stream;
+  }
 
-        try {
-            Xml.parse(is, Xml.Encoding.UTF_8, root.getContentHandler());
-        } catch (Exception e) {
-            throw new ParseException(e.getMessage(), 0);
-        }
-        return bookmarks;
+  public Cursor parse() throws ParseException {
+    final Bookmark currentBookmark = new Bookmark();
+    final RootElement root = new RootElement(nsRdf, "RDF");
+    final Element item = root.getChild(ns, "item");
+    final MatrixCursor bookmarks =
+        new MatrixCursor(
+            new String[] {
+              Bookmark._ID,
+              Bookmark.Url,
+              Bookmark.Description,
+              Bookmark.Meta,
+              Bookmark.Tags,
+              Bookmark.ToRead,
+              Bookmark.Shared,
+              Bookmark.Notes,
+              Bookmark.Time,
+              Bookmark.Account,
+              Bookmark.Hash
+            });
+
+    item.setEndElementListener(
+        new EndElementListener() {
+          public void end() {
+            if (currentBookmark.getDescription() == null
+                || currentBookmark.getDescription().equals(""))
+              currentBookmark.setDescription(currentBookmark.getUrl());
+
+            bookmarks.addRow(
+                new Object[] {
+                  0,
+                  currentBookmark.getUrl(),
+                  currentBookmark.getDescription(),
+                  currentBookmark.getMeta(),
+                  currentBookmark.getTagString(),
+                  currentBookmark.getToRead() ? 1 : 0,
+                  currentBookmark.getShared() ? 1 : 0,
+                  currentBookmark.getNotes(),
+                  currentBookmark.getTime(),
+                  currentBookmark.getAccount(),
+                  null
+                });
+            currentBookmark.clear();
+          }
+        });
+    item.getChild(ns, "title")
+        .setEndTextElementListener(
+            new EndTextElementListener() {
+              public void end(String body) {
+                currentBookmark.setDescription(body);
+              }
+            });
+    item.getChild(nsDc, "date")
+        .setEndTextElementListener(
+            new EndTextElementListener() {
+              public void end(String body) {
+                currentBookmark.setTime(DateParser.parseTime(body.trim()));
+              }
+            });
+    item.getChild(ns, "link")
+        .setEndTextElementListener(
+            new EndTextElementListener() {
+              public void end(String body) {
+                currentBookmark.setUrl(body);
+              }
+            });
+    item.getChild(nsDc, "creator")
+        .setEndTextElementListener(
+            new EndTextElementListener() {
+              public void end(String body) {
+                currentBookmark.setAccount(body);
+              }
+            });
+    item.getChild(ns, "description")
+        .setEndTextElementListener(
+            new EndTextElementListener() {
+              public void end(String body) {
+                currentBookmark.setNotes(body.trim());
+              }
+            });
+    item.getChild(nsDc, "subject")
+        .setEndTextElementListener(
+            new EndTextElementListener() {
+              public void end(String body) {
+                currentBookmark.setTagString(body.trim());
+              }
+            });
+
+    try {
+      Xml.parse(is, Xml.Encoding.UTF_8, root.getContentHandler());
+    } catch (Exception e) {
+      throw new ParseException(e.getMessage(), 0);
     }
+    return bookmarks;
+  }
 }

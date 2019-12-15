@@ -26,73 +26,73 @@ import android.provider.BaseColumns;
 
 public class TagContent {
 
-	public static class Tag implements BaseColumns {
-		public static final Uri CONTENT_URI = Uri.parse("content://" + 
-				BookmarkContentProvider.AUTHORITY + "/tag");
-		
-		public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.PinDroid.tags";
-		
-		public static final String Name = "NAME";
-		public static final String Count = "COUNT";
-		public static final String Account = "ACCOUNT";
-		
-        private String mTagName;
-        private int mCount = 0;
-        private int mId = 0;
-        private String mType = null;
+  public static class Tag implements BaseColumns {
+    public static final Uri CONTENT_URI =
+        Uri.parse("content://" + BookmarkContentProvider.AUTHORITY + "/tag");
 
-        public int getId(){
-        	return mId;
-        }
-        
-        public String getTagName() {
-            return mTagName;
-        }
+    public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.PinDroid.tags";
 
-        public void setTagName(String tag) {
-        	mTagName = tag;
-        }
-        
-        public int getCount() {
-            return mCount;
-        }
-        
-        public void setTagCount(int count) {
-        	mCount = count;
-        }
-        
-        public String getType() {
-            return mType;
-        }
-        
-        public void setType(String type) {
-        	mType = type;
-        }
-        
-        public void setCount(int count) {
-        	mCount = count;
-        }
-        
-        public Tag() {
-        	mTagName = "";
-        }
-        
-        public Tag(String tagName) {
-            mTagName = tagName;
-        }
+    public static final String Name = "NAME";
+    public static final String Count = "COUNT";
+    public static final String Account = "ACCOUNT";
 
-        public Tag(String tagName, int count) {
-            mTagName = tagName;
-            mCount = count;
-        }
-        
-        public Tag copy() {
-        	Tag t = new Tag();
-        	t.mCount = this.mCount;
-        	t.mId = this.mId;
-        	t.mTagName = this.mTagName;
-        	t.mType = this.mType;
-        	return t;
-        }
-	}
+    private String mTagName;
+    private int mCount = 0;
+    private int mId = 0;
+    private String mType = null;
+
+    public int getId() {
+      return mId;
+    }
+
+    public String getTagName() {
+      return mTagName;
+    }
+
+    public void setTagName(String tag) {
+      mTagName = tag;
+    }
+
+    public int getCount() {
+      return mCount;
+    }
+
+    public void setTagCount(int count) {
+      mCount = count;
+    }
+
+    public String getType() {
+      return mType;
+    }
+
+    public void setType(String type) {
+      mType = type;
+    }
+
+    public void setCount(int count) {
+      mCount = count;
+    }
+
+    public Tag() {
+      mTagName = "";
+    }
+
+    public Tag(String tagName) {
+      mTagName = tagName;
+    }
+
+    public Tag(String tagName, int count) {
+      mTagName = tagName;
+      mCount = count;
+    }
+
+    public Tag copy() {
+      Tag t = new Tag();
+      t.mCount = this.mCount;
+      t.mId = this.mId;
+      t.mTagName = this.mTagName;
+      t.mType = this.mType;
+      return t;
+    }
+  }
 }

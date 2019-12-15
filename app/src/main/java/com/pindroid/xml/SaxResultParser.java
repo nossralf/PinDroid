@@ -24,39 +24,37 @@ package com.pindroid.xml;
 import android.sax.RootElement;
 import android.sax.StartElementListener;
 import android.util.Xml;
-
 import com.pindroid.client.PinboardApiResult;
-
-import org.xml.sax.Attributes;
-
 import java.io.InputStream;
 import java.text.ParseException;
+import org.xml.sax.Attributes;
 
 public class SaxResultParser {
 
-	private InputStream is;
-	
-    public SaxResultParser(InputStream stream) {
-    	is = stream;
-    }
+  private InputStream is;
 
-    public PinboardApiResult parse() throws ParseException {
-        final PinboardApiResult result = new PinboardApiResult();
-        final RootElement root = new RootElement("result");
+  public SaxResultParser(InputStream stream) {
+    is = stream;
+  }
 
-        root.setStartElementListener(new StartElementListener(){
-            public void start(Attributes attributes) {
-            	final String code = attributes.getValue("code");
-            	
-            	result.setCode(code);
-            }
+  public PinboardApiResult parse() throws ParseException {
+    final PinboardApiResult result = new PinboardApiResult();
+    final RootElement root = new RootElement("result");
+
+    root.setStartElementListener(
+        new StartElementListener() {
+          public void start(Attributes attributes) {
+            final String code = attributes.getValue("code");
+
+            result.setCode(code);
+          }
         });
 
-        try {
-            Xml.parse(is, Xml.Encoding.UTF_8, root.getContentHandler());
-        } catch (Exception e) {
-            throw new ParseException(e.getMessage(), 0);
-        }
-        return result;
+    try {
+      Xml.parse(is, Xml.Encoding.UTF_8, root.getContentHandler());
+    } catch (Exception e) {
+      throw new ParseException(e.getMessage(), 0);
     }
+    return result;
+  }
 }

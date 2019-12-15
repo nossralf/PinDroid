@@ -31,28 +31,45 @@ import android.content.pm.PackageManager.NameNotFoundException;
 
 public class PackageReceiver extends BroadcastReceiver {
 
-	@Override
-	public void onReceive(Context context, Intent intent) {
-		if(intent.getData() != null && intent.getData().getSchemeSpecificPart().equals("com.pindroid.readlater")){
-			if(intent.getAction().equals(Intent.ACTION_PACKAGE_ADDED) && !intent.getBooleanExtra(Intent.EXTRA_REPLACING, false)){
-				ComponentName cn = new ComponentName("com.pindroid", "com.pindroid.activity.SaveReadLaterBookmark");
-				context.getPackageManager().setComponentEnabledSetting(cn, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
-			}
-			
-			if(intent.getAction().equals(Intent.ACTION_PACKAGE_REMOVED) && !intent.getBooleanExtra(Intent.EXTRA_REPLACING, false)){
-				ComponentName cn = new ComponentName("com.pindroid", "com.pindroid.activity.SaveReadLaterBookmark");
-				context.getPackageManager().setComponentEnabledSetting(cn, PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, PackageManager.DONT_KILL_APP);
-			}
-		} else if(intent.getAction().equals(Intent.ACTION_MY_PACKAGE_REPLACED)){
-			try {
-				PackageInfo pi = context.getPackageManager().getPackageInfo("com.pindroid.readlater", 0);
-				
-				if(pi != null){
-					ComponentName cn = new ComponentName("com.pindroid", "com.pindroid.activity.SaveReadLaterBookmark");
-					context.getPackageManager().setComponentEnabledSetting(cn, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
-				}
-			} catch (NameNotFoundException e) {
-			}
-		}
-	}
+  @Override
+  public void onReceive(Context context, Intent intent) {
+    if (intent.getData() != null
+        && intent.getData().getSchemeSpecificPart().equals("com.pindroid.readlater")) {
+      if (intent.getAction().equals(Intent.ACTION_PACKAGE_ADDED)
+          && !intent.getBooleanExtra(Intent.EXTRA_REPLACING, false)) {
+        ComponentName cn =
+            new ComponentName("com.pindroid", "com.pindroid.activity.SaveReadLaterBookmark");
+        context
+            .getPackageManager()
+            .setComponentEnabledSetting(
+                cn, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+      }
+
+      if (intent.getAction().equals(Intent.ACTION_PACKAGE_REMOVED)
+          && !intent.getBooleanExtra(Intent.EXTRA_REPLACING, false)) {
+        ComponentName cn =
+            new ComponentName("com.pindroid", "com.pindroid.activity.SaveReadLaterBookmark");
+        context
+            .getPackageManager()
+            .setComponentEnabledSetting(
+                cn, PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, PackageManager.DONT_KILL_APP);
+      }
+    } else if (intent.getAction().equals(Intent.ACTION_MY_PACKAGE_REPLACED)) {
+      try {
+        PackageInfo pi = context.getPackageManager().getPackageInfo("com.pindroid.readlater", 0);
+
+        if (pi != null) {
+          ComponentName cn =
+              new ComponentName("com.pindroid", "com.pindroid.activity.SaveReadLaterBookmark");
+          context
+              .getPackageManager()
+              .setComponentEnabledSetting(
+                  cn,
+                  PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                  PackageManager.DONT_KILL_APP);
+        }
+      } catch (NameNotFoundException e) {
+      }
+    }
+  }
 }

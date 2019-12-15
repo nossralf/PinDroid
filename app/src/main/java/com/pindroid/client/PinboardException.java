@@ -22,8 +22,7 @@
 package com.pindroid.client;
 
 public class PinboardException extends Exception {
-	private static final long serialVersionUID = 3310647147345590019L;
+  private static final long serialVersionUID = 3310647147345590019L;
 
-	public PinboardException(){
-	}
+  public PinboardException() {}
 }

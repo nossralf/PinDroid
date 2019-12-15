@@ -24,34 +24,34 @@ package com.pindroid.xml;
 import android.sax.EndTextElementListener;
 import android.sax.RootElement;
 import android.util.Xml;
-
 import com.pindroid.client.PinboardAuthToken;
-
 import java.io.InputStream;
 import java.text.ParseException;
 
 public class SaxTokenParser {
 
-	private InputStream is;
-	
-    public SaxTokenParser(InputStream stream) {
-    	is = stream;
+  private InputStream is;
+
+  public SaxTokenParser(InputStream stream) {
+    is = stream;
+  }
+
+  public PinboardAuthToken parse() throws ParseException {
+    final PinboardAuthToken token = new PinboardAuthToken();
+    final RootElement root = new RootElement("result");
+
+    root.setEndTextElementListener(
+        new EndTextElementListener() {
+          public void end(String body) {
+            token.setToken(body);
+          }
+        });
+
+    try {
+      Xml.parse(is, Xml.Encoding.UTF_8, root.getContentHandler());
+    } catch (Exception e) {
+      throw new ParseException(e.getMessage(), 0);
     }
-
-    public PinboardAuthToken parse() throws ParseException {
-        final PinboardAuthToken token = new PinboardAuthToken();
-        final RootElement root = new RootElement("result");
-
-        root.setEndTextElementListener(new EndTextElementListener(){
-			public void end(String body) {
-				token.setToken(body);
-			}});
-
-        try {
-            Xml.parse(is, Xml.Encoding.UTF_8, root.getContentHandler());
-        } catch (Exception e) {
-            throw new ParseException(e.getMessage(), 0);
-        }
-        return token;
-    }
+    return token;
+  }
 }

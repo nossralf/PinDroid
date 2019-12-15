@@ -21,17 +21,15 @@
 
 package com.pindroid.test;
 
-import org.junit.Test;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import org.junit.Test;
+
 public class TestTest {
-	public TestTest(){
+  public TestTest() {}
 
-	}
-
-	@Test
-	public void testSample(){
-		assertThat("blah", true);
-	}
+  @Test
+  public void testSample() {
+    assertThat("blah", true);
+  }
 }

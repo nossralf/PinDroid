@@ -23,7 +23,6 @@ package com.pindroid.service;
 
 import android.app.IntentService;
 import android.content.Intent;
-
 import com.pindroid.Constants;
 import com.pindroid.R;
 import com.pindroid.client.NetworkUtilities;
@@ -31,23 +30,23 @@ import com.pindroid.platform.BookmarkManager;
 import com.pindroid.providers.BookmarkContent.Bookmark;
 
 public class SaveBookmarkService extends IntentService {
-	
-	public SaveBookmarkService() {
-		super("SaveBookmarkService");
-	}
 
-	@Override
-	protected void onHandleIntent(Intent intent) {
-		Bookmark bookmark = intent.getParcelableExtra(Constants.EXTRA_BOOKMARK);
-		
-		if(bookmark.getDescription() == null || bookmark.getDescription().equals("")) {
-    		bookmark.setDescription(NetworkUtilities.getWebpageTitle(bookmark.getUrl()));
-		}
-		
-		if(bookmark.getDescription() == null || bookmark.getDescription().equals("")) {
-			bookmark.setDescription(getResources().getString(R.string.add_bookmark_default_title));
-		}
-		
-		BookmarkManager.AddBookmark(bookmark, bookmark.getAccount(), this);
-	}
+  public SaveBookmarkService() {
+    super("SaveBookmarkService");
+  }
+
+  @Override
+  protected void onHandleIntent(Intent intent) {
+    Bookmark bookmark = intent.getParcelableExtra(Constants.EXTRA_BOOKMARK);
+
+    if (bookmark.getDescription() == null || bookmark.getDescription().equals("")) {
+      bookmark.setDescription(NetworkUtilities.getWebpageTitle(bookmark.getUrl()));
+    }
+
+    if (bookmark.getDescription() == null || bookmark.getDescription().equals("")) {
+      bookmark.setDescription(getResources().getString(R.string.add_bookmark_default_title));
+    }
+
+    BookmarkManager.AddBookmark(bookmark, bookmark.getAccount(), this);
+  }
 }

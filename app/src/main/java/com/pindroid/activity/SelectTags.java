@@ -25,41 +25,39 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
-
+import androidx.appcompat.app.AppCompatActivity;
 import com.pindroid.R;
 import com.pindroid.application.PindroidApplication;
 import com.pindroid.fragment.SelectTagsFragment;
-
 import java.util.Set;
 
-import androidx.appcompat.app.AppCompatActivity;
+public class SelectTags extends AppCompatActivity
+    implements SelectTagsFragment.OnTagsSelectedListener {
 
-public class SelectTags extends AppCompatActivity implements SelectTagsFragment.OnTagsSelectedListener {
+  SelectTagsFragment frag;
 
-	SelectTagsFragment frag;
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    setContentView(R.layout.select_tags);
+    getSupportActionBar().setTitle(R.string.select_tags_activity_title);
 
-        setContentView(R.layout.select_tags);
-        getSupportActionBar().setTitle(R.string.select_tags_activity_title);
+    frag = (SelectTagsFragment) getSupportFragmentManager().findFragmentById(R.id.listcontent);
+    frag.setUsername(((PindroidApplication) getApplication()).getUsername());
+  }
 
-		frag = (SelectTagsFragment) getSupportFragmentManager().findFragmentById(R.id.listcontent);
-        frag.setUsername(((PindroidApplication)getApplication()).getUsername());
-    }
+  public void onTagsSelected(Set<String> tags) {
 
-	public void onTagsSelected(Set<String> tags) {
+    SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
+    editor.putStringSet(getResources().getString(R.string.pref_drawertags_key), tags);
+    editor.commit();
 
-        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
-        editor.putStringSet(getResources().getString(R.string.pref_drawertags_key), tags);
-        editor.commit();
+    finish();
+  }
 
-        finish();
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		return false;
-	}
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    return false;
+  }
 }

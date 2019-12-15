@@ -26,68 +26,68 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
+import androidx.fragment.app.Fragment;
 import com.pindroid.R;
 import com.pindroid.platform.NoteManager;
 import com.pindroid.providers.ContentNotFoundException;
 import com.pindroid.providers.NoteContent.Note;
 
-import androidx.fragment.app.Fragment;
-
 public class ViewNoteFragment extends Fragment {
-	
-	private TextView mTitle;
-	private TextView mText;
-	private TextView mUsername;
-	private Note note;
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState){
-		super.onCreate(savedInstanceState);
-		setRetainInstance(false);
-	}
-	
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState){
-		super.onActivityCreated(savedInstanceState);
-		
-		mTitle = (TextView) getView().findViewById(R.id.view_note_title);
-		mText = (TextView) getView().findViewById(R.id.view_note_text);
-		mUsername = (TextView) getView().findViewById(R.id.view_note_account);
-		
-		setHasOptionsMenu(true);
-	}
-    
-	public void setNote(Note n) {
-		note = n;
-	}
-	
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.view_note_fragment, container, false);
-    }
 
-    @Override
-    public void onStart(){
-    	super.onStart();
-    	
-    	loadNote();
-    }
-    
-    public void refresh() {
-    	loadNote();
-    }
+  private TextView mTitle;
+  private TextView mText;
+  private TextView mUsername;
+  private Note note;
 
-    public void loadNote(){
-    	if(note != null){
-			try{		
-				int id = note.getId();
-				note = NoteManager.GetById(id, getActivity());
-			} catch(ContentNotFoundException e){}
-			
-			mTitle.setText(note.getTitle());
-			mText.setText(note.getText());
-			mUsername.setText(note.getAccount());
-    	}
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setRetainInstance(false);
+  }
+
+  @Override
+  public void onActivityCreated(Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
+
+    mTitle = (TextView) getView().findViewById(R.id.view_note_title);
+    mText = (TextView) getView().findViewById(R.id.view_note_text);
+    mUsername = (TextView) getView().findViewById(R.id.view_note_account);
+
+    setHasOptionsMenu(true);
+  }
+
+  public void setNote(Note n) {
+    note = n;
+  }
+
+  @Override
+  public View onCreateView(
+      LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    return inflater.inflate(R.layout.view_note_fragment, container, false);
+  }
+
+  @Override
+  public void onStart() {
+    super.onStart();
+
+    loadNote();
+  }
+
+  public void refresh() {
+    loadNote();
+  }
+
+  public void loadNote() {
+    if (note != null) {
+      try {
+        int id = note.getId();
+        note = NoteManager.GetById(id, getActivity());
+      } catch (ContentNotFoundException e) {
+      }
+
+      mTitle.setText(note.getTitle());
+      mText.setText(note.getText());
+      mUsername.setText(note.getAccount());
     }
+  }
 }

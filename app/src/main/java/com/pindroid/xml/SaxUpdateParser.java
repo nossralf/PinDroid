@@ -24,46 +24,44 @@ package com.pindroid.xml;
 import android.sax.RootElement;
 import android.sax.StartElementListener;
 import android.util.Xml;
-
 import com.pindroid.client.Update;
 import com.pindroid.util.DateParser;
-
-import org.xml.sax.Attributes;
-
 import java.io.InputStream;
 import java.text.ParseException;
+import org.xml.sax.Attributes;
 
 public class SaxUpdateParser {
 
-	private InputStream is;
-	
-    public SaxUpdateParser(InputStream stream) {
-    	is = stream;
-    }
+  private InputStream is;
 
-    public Update parse() throws ParseException {
-        final Update update = new Update();
-        final RootElement root = new RootElement("update");
+  public SaxUpdateParser(InputStream stream) {
+    is = stream;
+  }
 
-        root.setStartElementListener(new StartElementListener(){
-            public void start(Attributes attributes) {
-            	final String time = attributes.getValue("time");
-            	long updateTime;
-				try {
-					updateTime = DateParser.parse(time).getTime();
-					update.setLastUpdate(updateTime);
-				} catch (ParseException e) {
-					update.setLastUpdate(0);
-					e.printStackTrace();
-				}	
+  public Update parse() throws ParseException {
+    final Update update = new Update();
+    final RootElement root = new RootElement("update");
+
+    root.setStartElementListener(
+        new StartElementListener() {
+          public void start(Attributes attributes) {
+            final String time = attributes.getValue("time");
+            long updateTime;
+            try {
+              updateTime = DateParser.parse(time).getTime();
+              update.setLastUpdate(updateTime);
+            } catch (ParseException e) {
+              update.setLastUpdate(0);
+              e.printStackTrace();
             }
+          }
         });
 
-        try {
-            Xml.parse(is, Xml.Encoding.UTF_8, root.getContentHandler());
-        } catch (Exception e) {
-            throw new ParseException(e.getMessage(), 0);
-        }
-        return update;
+    try {
+      Xml.parse(is, Xml.Encoding.UTF_8, root.getContentHandler());
+    } catch (Exception e) {
+      throw new ParseException(e.getMessage(), 0);
     }
+    return update;
+  }
 }

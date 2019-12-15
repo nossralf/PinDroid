@@ -24,50 +24,56 @@ package com.pindroid.xml;
 import android.sax.EndTextElementListener;
 import android.sax.RootElement;
 import android.util.Xml;
-
 import com.pindroid.providers.ArticleContent.Article;
-
 import java.io.InputStream;
 import java.text.ParseException;
 
 public class SaxArticleParser {
 
-	private InputStream is;
-	
-    public SaxArticleParser(InputStream stream) {
-    	is = stream;
-    }
+  private InputStream is;
 
-    public Article parse() throws ParseException {
-        final Article article = new Article();
-        final RootElement root = new RootElement("Article");
-        
-        root.getChild("ResponseUrl").setEndTextElementListener(new EndTextElementListener(){
-            public void end(String body) {
-            	article.setResponseUrl(body);
-            }
-        });
-        root.getChild("URL").setEndTextElementListener(new EndTextElementListener(){
-            public void end(String body) {
-            	article.setUrl(body);
-            }
-        });
-        root.getChild("Content").setEndTextElementListener(new EndTextElementListener(){
-            public void end(String body) {
-            	article.setContent(body);
-            }
-        });
-        root.getChild("Title").setEndTextElementListener(new EndTextElementListener(){
-            public void end(String body) {
-            	article.setTitle(body);
-            }
-        });
+  public SaxArticleParser(InputStream stream) {
+    is = stream;
+  }
 
-        try {
-            Xml.parse(is, Xml.Encoding.UTF_8, root.getContentHandler());
-        } catch (Exception e) {
-            throw new ParseException(e.getMessage(), 0);
-        }
-        return article;
+  public Article parse() throws ParseException {
+    final Article article = new Article();
+    final RootElement root = new RootElement("Article");
+
+    root.getChild("ResponseUrl")
+        .setEndTextElementListener(
+            new EndTextElementListener() {
+              public void end(String body) {
+                article.setResponseUrl(body);
+              }
+            });
+    root.getChild("URL")
+        .setEndTextElementListener(
+            new EndTextElementListener() {
+              public void end(String body) {
+                article.setUrl(body);
+              }
+            });
+    root.getChild("Content")
+        .setEndTextElementListener(
+            new EndTextElementListener() {
+              public void end(String body) {
+                article.setContent(body);
+              }
+            });
+    root.getChild("Title")
+        .setEndTextElementListener(
+            new EndTextElementListener() {
+              public void end(String body) {
+                article.setTitle(body);
+              }
+            });
+
+    try {
+      Xml.parse(is, Xml.Encoding.UTF_8, root.getContentHandler());
+    } catch (Exception e) {
+      throw new ParseException(e.getMessage(), 0);
     }
+    return article;
+  }
 }
