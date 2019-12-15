@@ -50,11 +50,11 @@
         android:name=".application.PindroidApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
-        android:icon="@drawable/ic_main"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/label"
         android:requiredAccountType="com.pindroid"
         android:theme="@style/PinDroid"
-        tools:replace="android:theme, android:label, android:icon">
+        tools:replace="android:label">
 
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
 
@@ -152,7 +152,6 @@
         </activity>
         <activity
             android:name=".activity.ScreenShortcut"
-            android:icon="@drawable/ic_main"
             android:label="@string/shortcut_activity_label" >
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />

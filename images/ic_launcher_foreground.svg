@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="1.0beta2 (2b71d25, 2019-12-03)"
+   sodipodi:docname="pin.svg"
+   id="svg132"
+   version="1.1"
+   height="48"
+   width="48"
+   y="0"
+   x="0">
+  <metadata
+     id="metadata136">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     inkscape:snap-global="false"
+     inkscape:current-layer="svg132"
+     inkscape:window-maximized="0"
+     inkscape:window-y="23"
+     inkscape:window-x="0"
+     inkscape:cy="26.395174"
+     inkscape:cx="24.014167"
+     inkscape:zoom="26.015143"
+     showgrid="false"
+     id="namedview134"
+     inkscape:window-height="1395"
+     inkscape:window-width="2560"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     guidetolerance="10"
+     gridtolerance="10"
+     objecttolerance="10"
+     borderopacity="1"
+     inkscape:document-rotation="0"
+     bordercolor="#666666"
+     pagecolor="#ffffff" />
+  <defs
+     id="defs110">
+    <linearGradient
+       id="color-1"
+       gradientUnits="userSpaceOnUse"
+       y2="62.49781"
+       x2="57.01315"
+       y1="12.27587"
+       x1="17.76052">
+      <stop
+         id="stop96"
+         stop-opacity="0.15"
+         stop-color="#000000"
+         offset="0.3" />
+      <stop
+         id="stop98"
+         stop-opacity="0"
+         stop-color="#000000"
+         offset="1" />
+    </linearGradient>
+  </defs>
+  <g
+     id="svg2"
+     fill="#000000"
+     stroke="none"
+     stroke-width="1"
+     stroke-miterlimit="4"
+     font-family="'Open Sans', sans-serif"
+     font-size="14"
+     style="font-weight:normal;text-anchor:start;mix-blend-mode:normal;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-dashoffset:0">
+    <g
+       id="g10">
+      <g
+         id="g12">
+        <g
+           id="g24" />
+      </g>
+    </g>
+  </g>
+  <g
+     id="g122"
+     fill="#000000"
+     stroke="none"
+     stroke-width="1"
+     stroke-miterlimit="4"
+     font-family="'Open Sans', sans-serif"
+     font-size="14"
+     style="font-weight:normal;text-anchor:start;mix-blend-mode:normal;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-dashoffset:0">
+    <g
+       id="g120">
+      <g
+         id="g118">
+        <g
+           id="g116" />
+      </g>
+    </g>
+  </g>
+  <path
+     sodipodi:nodetypes="ccccccccccccccccccc"
+     d="M 23.95176,35.72407 23.606,32.04181 17.76052,26.19633 c 0.01213,-2.38353 1.54698,-1.56261 3.3702,-2.34062 l 10e-6,1e-5 -0.0303,-8.49346 -1.65117,-1.65117 -0.67285,-1.43522 1.52605,1.52605 h 10e-6 l -1.52606,-1.52606 10.58899,0.01229 10e-6,10e-6 v -10e-6 L 48.004137,30.542486 48.112655,47.977868 34.32116,48.015517 23.951714,35.724113 Z"
+     fill="url(#color-1)"
+     stroke-width="1"
+     stroke-miterlimit="10"
+     font-family="sans-serif"
+     font-size="12"
+     id="path126"
+     style="font-weight:normal;text-anchor:start;mix-blend-mode:normal;fill:url(#color-1);stroke:none;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-dashoffset:0"
+     inkscape:connector-curvature="0" />
+  <path
+     d="m 24.94222,26.20499 -0.99047,9.51914 -0.89408,-9.52178 -5.29715,-0.006 c 0.01213,-2.38353 1.54698,-1.56261 3.3702,-2.34062 l -0.03557,-9.96942 -1.6459,-0.17523 -0.67285,-1.43522 10.58899,0.0123 -0.94712,1.56318 -1.43015,0.04183 -0.0085,10.09944 c 2.07582,0.69654 3.27247,-0.16459 3.25971,2.21837 z"
+     fill="#ffffff"
+     stroke="none"
+     stroke-width="0"
+     stroke-miterlimit="4"
+     font-family="'Open Sans', sans-serif"
+     font-size="14"
+     id="path128"
+     inkscape:connector-curvature="0"
+     style="font-weight:normal;text-anchor:start;mix-blend-mode:normal;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-dashoffset:0" />
+</svg>
